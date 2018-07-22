@@ -1,24 +1,11 @@
-/*
- * Copyright 2014 Red Hat, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.intellij.lang.yang.lexer;
+
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
+
+import static com.intellij.psi.TokenType.BAD_CHARACTER;
+import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.intellij.lang.yang.psi.YangTypes.*;
-import static com.intellij.lang.yang.psi.YangTokenTypeSets.*;
 
 %%
 
@@ -35,133 +22,110 @@ import static com.intellij.lang.yang.psi.YangTokenTypeSets.*;
 %type IElementType
 %unicode
 
+EOL=\R
+WHITE_SPACE=\s+
 
-LineTerminator = \r|\n|\r\n
-InputCharacter = [^\r\n]
-WhiteSpace = {LineTerminator} | [ \t\f]
-
-Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
-TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
-EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}
-DocumentationComment = "/**" {CommentContent} "*"+ "/"
-CommentContent       = ( [^*] | \*+ [^/*] )*
-
-
-ESC = "\\"[^ ]
-CHAR = {ESC} | [^\'\"\\]
-STRING_BAD1 = \" ({CHAR} | \') *
-StringLiteral = {STRING_BAD1} \" | {Identifier}
-
-Identifier = [/.a-zA-Z_0-9\-][a-zA-Z0-9_\-.:]*
-
-%state VALUE_MODE
+LINE_COMENT="//".*
+BLOCK_COMMENT="/"\*(.|\n)*\*"/"
+DOUBLE_QUOTED_STRING=\"([^\\\"])*\"?
+SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
+IDENTIFIER=[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*
 
 %%
 <YYINITIAL> {
-  ";"                     { return YANG_SEMICOLON; }
-  "+"                     { return YANG_PLUS; }
-  "{"                     { return YANG_LEFT_BRACE; }
-  "}"                     { return YANG_RIGHT_BRACE; }
-  "anyxml"                { yybegin(VALUE_MODE); return YANG_ANYXML_KEYWORD; }
-  "argument"              { yybegin(VALUE_MODE); return YANG_ARGUMENT_KEYWORD; }
-  "augment"               { yybegin(VALUE_MODE); return YANG_AUGMENT_KEYWORD; }
-  "base"                  { yybegin(VALUE_MODE); return YANG_BASE_KEYWORD; }
-  "belongs-to"            { yybegin(VALUE_MODE); return YANG_BELONGS_TO_KEYWORD; }
-  "bit"                   { yybegin(VALUE_MODE); return YANG_BIT_KEYWORD; }
-  "case"                  { yybegin(VALUE_MODE); return YANG_CASE_KEYWORD; }
-  "choice"                { yybegin(VALUE_MODE); return YANG_CHOICE_KEYWORD; }
-  "config"                { yybegin(VALUE_MODE); return YANG_CONFIG_KEYWORD; }
-  "contact"               { yybegin(VALUE_MODE); return YANG_CONTACT_KEYWORD; }
-  "container"             { yybegin(VALUE_MODE); return YANG_CONTAINER_KEYWORD; }
-  "default"               { yybegin(VALUE_MODE); return YANG_DEFAULT_KEYWORD; }
-  "description"           { yybegin(VALUE_MODE); return YANG_DESCRIPTION_KEYWORD; }
-  "enum"                  { yybegin(VALUE_MODE); return YANG_ENUM_KEYWORD; }
-  "error-app_tag"         { yybegin(VALUE_MODE); return YANG_ERROR_APP_TAG_KEYWORD; }
-  "error-message"         { yybegin(VALUE_MODE); return YANG_ERROR_MESSAGE_KEYWORD; }
-  "extension"             { yybegin(VALUE_MODE); return YANG_EXTENSION_KEYWORD; }
-  "deviation"             { yybegin(VALUE_MODE); return YANG_DEVIATION_KEYWORD; }
-  "deviate"               { yybegin(VALUE_MODE); return YANG_DEVIATE_KEYWORD; }
-  "feature"               { yybegin(VALUE_MODE); return YANG_FEATURE_KEYWORD; }
-  "fraction-digits"       { yybegin(VALUE_MODE); return YANG_FRACTION_DIGITS_KEYWORD; }
-  "grouping"              { yybegin(VALUE_MODE); return YANG_GROUPING_KEYWORD; }
-  "identity"              { yybegin(VALUE_MODE); return YANG_IDENTITY_KEYWORD; }
-  "if-feature"            { yybegin(VALUE_MODE); return YANG_IF_FEATURE_KEYWORD; }
-  "import"                { yybegin(VALUE_MODE); return YANG_IMPORT_KEYWORD; }
-  "include"               { yybegin(VALUE_MODE); return YANG_INCLUDE_KEYWORD; }
-  "input"                 { yybegin(VALUE_MODE); return YANG_INPUT_KEYWORD; }
-  "key"                   { yybegin(VALUE_MODE); return YANG_KEY_KEYWORD; }
-  "leaf"                  { yybegin(VALUE_MODE); return YANG_LEAF_KEYWORD; }
-  "leaf-list"             { yybegin(VALUE_MODE); return YANG_LEAF_LIST_KEYWORD; }
-  "length"                { yybegin(VALUE_MODE); return YANG_LENGTH_KEYWORD; }
-  "list"                  { yybegin(VALUE_MODE); return YANG_LIST_KEYWORD; }
-  "mandatory"             { yybegin(VALUE_MODE); return YANG_MANDATORY_KEYWORD; }
-  "max-elements"          { yybegin(VALUE_MODE); return YANG_MAX_ELEMENTS_KEYWORD; }
-  "min-elements"          { yybegin(VALUE_MODE); return YANG_MIN_ELEMENTS_KEYWORD; }
-  "module"                { yybegin(VALUE_MODE); return YANG_MODULE_KEYWORD; }
-  "must"                  { yybegin(VALUE_MODE); return YANG_MUST_KEYWORD; }
-  "namespace"             { yybegin(VALUE_MODE); return YANG_NAMESPACE_KEYWORD; }
-  "notification"          { yybegin(VALUE_MODE); return YANG_NOTIFICATION_KEYWORD; }
-  "ordered-by"            { yybegin(VALUE_MODE); return YANG_ORDERED_BY_KEYWORD; }
-  "organization"          { yybegin(VALUE_MODE); return YANG_ORGANIZATION_KEYWORD; }
-  "output"                { yybegin(VALUE_MODE); return YANG_OUTPUT_KEYWORD; }
-  "path"                  { yybegin(VALUE_MODE); return YANG_PATH_KEYWORD; }
-  "pattern"               { yybegin(VALUE_MODE); return YANG_PATTERN_KEYWORD; }
-  "position"              { yybegin(VALUE_MODE); return YANG_POSITION_KEYWORD; }
-  "prefix"                { yybegin(VALUE_MODE); return YANG_PREFIX_KEYWORD; }
-  "presence"              { yybegin(VALUE_MODE); return YANG_PRESENCE_KEYWORD; }
-  "range"                 { yybegin(VALUE_MODE); return YANG_RANGE_KEYWORD; }
-  "reference"             { yybegin(VALUE_MODE); return YANG_REFERENCE_KEYWORD; }
-  "refine"                { yybegin(VALUE_MODE); return YANG_REFINE_KEYWORD; }
-  "require-instance"      { yybegin(VALUE_MODE); return YANG_REQUIRE_INSTANCE_KEYWORD; }
-  "revision"              { yybegin(VALUE_MODE); return YANG_REVISION_KEYWORD; }
-  "revision-date"         { yybegin(VALUE_MODE); return YANG_REVISION_DATE_KEYWORD; }
-  "rpc"                   { yybegin(VALUE_MODE); return YANG_RPC_KEYWORD; }
-  "status"                { yybegin(VALUE_MODE); return YANG_STATUS_KEYWORD; }
-  "submodule"             { yybegin(VALUE_MODE); return YANG_SUBMODULE_KEYWORD; }
-  "type"                  { yybegin(VALUE_MODE); return YANG_TYPE_KEYWORD; }
-  "typedef"               { yybegin(VALUE_MODE); return YANG_TYPEDEF_KEYWORD; }
-  "unique"                { yybegin(VALUE_MODE); return YANG_UNIQUE_KEYWORD; }
-  "units"                 { yybegin(VALUE_MODE); return YANG_UNITS_KEYWORD; }
-  "uses"                  { yybegin(VALUE_MODE); return YANG_USES_KEYWORD; }
-  "value"                 { yybegin(VALUE_MODE); return YANG_VALUE_KEYWORD; }
-  "when"                  { yybegin(VALUE_MODE); return YANG_WHEN_KEYWORD; }
-  "yang-version"          { yybegin(VALUE_MODE); return YANG_YANG_VERSION_KEYWORD; }
-  "yin-element"           { yybegin(VALUE_MODE); return YANG_YIN_ELEMENT_KEYWORD; }
-  //"add"                   { yybegin(VALUE_MODE); return YANG_ADD_KEYWORD; }
-  //"current"               { yybegin(VALUE_MODE); return YANG_CURRENT_KEYWORD; }
-  //"delete"                { yybegin(VALUE_MODE); return YANG_DELETE_KEYWORD; }
-  //"deprecated"            { yybegin(VALUE_MODE); return YANG_DEPRECATED_KEYWORD; }
-  //"false"                 { yybegin(VALUE_MODE); return YANG_FALSE_KEYWORD; }
-  //"max"                   { yybegin(VALUE_MODE); return YANG_MAX_KEYWORD; }
-  //"min"                   { yybegin(VALUE_MODE); return YANG_MIN_KEYWORD; }
-  //"not_supported"         { yybegin(VALUE_MODE); return YANG_NOT_SUPPORTED_KEYWORD; }
-  //"obsolete"              { yybegin(VALUE_MODE); return YANG_OBSOLETE_KEYWORD; }
-  //"replace"               { yybegin(VALUE_MODE); return YANG_REPLACE_KEYWORD; }
-  //"system"                { yybegin(VALUE_MODE); return YANG_SYSTEM_KEYWORD; }
-  //"true"                  { yybegin(VALUE_MODE); return YANG_TRUE_KEYWORD; }
-  //"unbounded"             { yybegin(VALUE_MODE); return YANG_UNBOUNDED_KEYWORD; }
-  //"user"                  { yybegin(VALUE_MODE); return YANG_USER_KEYWORD; }
+  {WHITE_SPACE}               { return WHITE_SPACE; }
 
-  {Identifier}            { yybegin(VALUE_MODE); return YANG_IDENTIFIER; }
+  " "                         { return YANG_SEP; }
+  "{"                         { return YANG_LEFT_BRACE; }
+  "}"                         { return YANG_RIGHT_BRACE; }
+  ";"                         { return YANG_SEMICOLON; }
+  "+"                         { return YANG_PLUS; }
+  "anyxml"                    { return YANG_ANYXML_KEYWORD; }
+  "argument"                  { return YANG_ARGUMENT_KEYWORD; }
+  "augment"                   { return YANG_AUGMENT_KEYWORD; }
+  "base"                      { return YANG_BASE_KEYWORD; }
+  "belongs-to"                { return YANG_BELONGS_TO_KEYWORD; }
+  "bit"                       { return YANG_BIT_KEYWORD; }
+  "case"                      { return YANG_CASE_KEYWORD; }
+  "choice"                    { return YANG_CHOICE_KEYWORD; }
+  "config"                    { return YANG_CONFIG_KEYWORD; }
+  "contact"                   { return YANG_CONTACT_KEYWORD; }
+  "container"                 { return YANG_CONTAINER_KEYWORD; }
+  "default"                   { return YANG_DEFAULT_KEYWORD; }
+  "description"               { return YANG_DESCRIPTION_KEYWORD; }
+  "enum"                      { return YANG_ENUM_KEYWORD; }
+  "error-app-tag"             { return YANG_ERROR_APP_TAG_KEYWORD; }
+  "error-message"             { return YANG_ERROR_MESSAGE_KEYWORD; }
+  "extension"                 { return YANG_EXTENSION_KEYWORD; }
+  "deviation"                 { return YANG_DEVIATION_KEYWORD; }
+  "deviate"                   { return YANG_DEVIATE_KEYWORD; }
+  "feature"                   { return YANG_FEATURE_KEYWORD; }
+  "fraction-digits"           { return YANG_FRACTION_DIGITS_KEYWORD; }
+  "grouping"                  { return YANG_GROUPING_KEYWORD; }
+  "identity"                  { return YANG_IDENTITY_KEYWORD; }
+  "if-feature"                { return YANG_IF_FEATURE_KEYWORD; }
+  "import"                    { return YANG_IMPORT_KEYWORD; }
+  "include"                   { return YANG_INCLUDE_KEYWORD; }
+  "input"                     { return YANG_INPUT_KEYWORD; }
+  "key"                       { return YANG_KEY_KEYWORD; }
+  "leaf"                      { return YANG_LEAF_KEYWORD; }
+  "leaf-list"                 { return YANG_LEAF_LIST_KEYWORD; }
+  "length"                    { return YANG_LENGTH_KEYWORD; }
+  "list"                      { return YANG_LIST_KEYWORD; }
+  "mandatory"                 { return YANG_MANDATORY_KEYWORD; }
+  "max-elements"              { return YANG_MAX_ELEMENTS_KEYWORD; }
+  "min-elements"              { return YANG_MIN_ELEMENTS_KEYWORD; }
+  "module"                    { return YANG_MODULE_KEYWORD; }
+  "must"                      { return YANG_MUST_KEYWORD; }
+  "namespace"                 { return YANG_NAMESPACE_KEYWORD; }
+  "notification"              { return YANG_NOTIFICATION_KEYWORD; }
+  "ordered-by"                { return YANG_ORDERED_BY_KEYWORD; }
+  "organization"              { return YANG_ORGANIZATION_KEYWORD; }
+  "output"                    { return YANG_OUTPUT_KEYWORD; }
+  "path"                      { return YANG_PATH_KEYWORD; }
+  "pattern"                   { return YANG_PATTERN_KEYWORD; }
+  "position"                  { return YANG_POSITION_KEYWORD; }
+  "prefix"                    { return YANG_PREFIX_KEYWORD; }
+  "presence"                  { return YANG_PRESENCE_KEYWORD; }
+  "range"                     { return YANG_RANGE_KEYWORD; }
+  "reference"                 { return YANG_REFERENCE_KEYWORD; }
+  "refine"                    { return YANG_REFINE_KEYWORD; }
+  "require-instance"          { return YANG_REQUIRE_INSTANCE_KEYWORD; }
+  "revision"                  { return YANG_REVISION_KEYWORD; }
+  "revision-date"             { return YANG_REVISION_DATE_KEYWORD; }
+  "rpc"                       { return YANG_RPC_KEYWORD; }
+  "status"                    { return YANG_STATUS_KEYWORD; }
+  "submodule"                 { return YANG_SUBMODULE_KEYWORD; }
+  "type"                      { return YANG_TYPE_KEYWORD; }
+  "typedef"                   { return YANG_TYPEDEF_KEYWORD; }
+  "unique"                    { return YANG_UNIQUE_KEYWORD; }
+  "units"                     { return YANG_UNITS_KEYWORD; }
+  "uses"                      { return YANG_USES_KEYWORD; }
+  "value"                     { return YANG_VALUE_KEYWORD; }
+  "when"                      { return YANG_WHEN_KEYWORD; }
+  "yang-version"              { return YANG_YANG_VERSION_KEYWORD; }
+  "yin-element"               { return YANG_YIN_ELEMENT_KEYWORD; }
+  "add"                       { return YANG_ADD_KEYWORD; }
+  "current"                   { return YANG_CURRENT_KEYWORD; }
+  "delete"                    { return YANG_DELETE_KEYWORD; }
+  "deprecated"                { return YANG_DEPRECATED_KEYWORD; }
+  "false"                     { return YANG_FALSE_KEYWORD; }
+  "max"                       { return YANG_MAX_KEYWORD; }
+  "min"                       { return YANG_MIN_KEYWORD; }
+  "not-supported"             { return YANG_NOT_SUPPORTED_KEYWORD; }
+  "obsolete"                  { return YANG_OBSOLETE_KEYWORD; }
+  "replace"                   { return YANG_REPLACE_KEYWORD; }
+  "system"                    { return YANG_SYSTEM_KEYWORD; }
+  "true"                      { return YANG_TRUE_KEYWORD; }
+  "unbounded"                 { return YANG_UNBOUNDED_KEYWORD; }
+  "user"                      { return YANG_USER_KEYWORD; }
 
-  // Treat comments as White Space
-  {Comment}               { return com.intellij.psi.TokenType.WHITE_SPACE; }
-  {WhiteSpace}+           { return com.intellij.psi.TokenType.WHITE_SPACE; }
-
-}
-
-<VALUE_MODE> {
-
-  /* string literal */
-  {StringLiteral}         { return YANG_STRING_LITERAL; }
-
-  // Treat comments as White Space
-  {Comment}               { return com.intellij.psi.TokenType.WHITE_SPACE; }
-  {WhiteSpace}+           { return com.intellij.psi.TokenType.WHITE_SPACE; }
-
-  ";"                     { yybegin(YYINITIAL); return YANG_SEMICOLON; }
-  "{"                     { yybegin(YYINITIAL); return YANG_LEFT_BRACE; }
+  {LINE_COMENT}               { return YANG_LINE_COMENT; }
+  {BLOCK_COMMENT}             { return YANG_BLOCK_COMMENT; }
+  {DOUBLE_QUOTED_STRING}      { return YANG_DOUBLE_QUOTED_STRING; }
+  {SINGLE_QUOTED_STRING}      { return YANG_SINGLE_QUOTED_STRING; }
+  {IDENTIFIER}                { return YANG_IDENTIFIER; }
 
 }
 
-[^] { return com.intellij.psi.TokenType.BAD_CHARACTER; }
+[^] { return BAD_CHARACTER; }

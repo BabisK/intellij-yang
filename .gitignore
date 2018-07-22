@@ -1,6 +1,9 @@
 ### https://raw.github.com/github/gitignore/master/java.gitignore
 
 *.class
+build/
+
+.gradle/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
