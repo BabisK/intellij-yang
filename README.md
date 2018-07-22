@@ -7,6 +7,7 @@ This IntelliJ Plugin adds support for Yang.
 
 - Syntax Highlighting
 - Rudimentary Code Completion
+- Code format
 
 # To Do
 
@@ -23,7 +24,9 @@ This IntelliJ Plugin adds support for Yang.
 
 # Development Environment
 
-Follow the tutorial [here](http://confluence.jetbrains.com/display/IntelliJIDEA/Prerequisites) to get set up
+This project supports Gradle build system. 
+You just import the project with Gradle(gradlew). 
+You can test your own plugin by executing runIde Task.  
 
 # License
 
