@@ -24,9 +24,9 @@ This IntelliJ Plugin adds support for Yang.
 
 # Development Environment
 
-This project supports Gradle build system. 
-You just import the project with Gradle(gradlew). 
-You can test your own plugin by executing runIde Task.  
+This project supports Gradle build system.  
+To set up the environment, you just import the cloned project with Gradle(gradlew).  
+And you can test your own plugin by executing *runIde* Task.  
 
 # License
 
