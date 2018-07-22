@@ -1,26 +1,10 @@
-/*
- * Copyright 2014 Red Hat, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 // This is a generated file. Not intended for manual editing.
 package com.intellij.lang.yang.psi;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.psi.impl.*;
+import com.intellij.lang.yang.psi.impl.*;
 
 public interface YangTypes {
 
@@ -31,14 +15,12 @@ public interface YangTypes {
   IElementType YANG_BELONGS_TO_STMT = new YangElementType("YANG_BELONGS_TO_STMT");
   IElementType YANG_BITS_SPECIFICATION = new YangElementType("YANG_BITS_SPECIFICATION");
   IElementType YANG_BIT_STMT = new YangElementType("YANG_BIT_STMT");
-  IElementType YANG_BODY_STMTS = new YangElementType("YANG_BODY_STMTS");
   IElementType YANG_CASE_STMT = new YangElementType("YANG_CASE_STMT");
   IElementType YANG_CHOICE_STMT = new YangElementType("YANG_CHOICE_STMT");
   IElementType YANG_CONFIG_ARG = new YangElementType("YANG_CONFIG_ARG");
   IElementType YANG_CONFIG_STMT = new YangElementType("YANG_CONFIG_STMT");
   IElementType YANG_CONTACT_STMT = new YangElementType("YANG_CONTACT_STMT");
   IElementType YANG_CONTAINER_STMT = new YangElementType("YANG_CONTAINER_STMT");
-  IElementType YANG_DATA_DEF_STMT = new YangElementType("YANG_DATA_DEF_STMT");
   IElementType YANG_DECIMAL_64_SPECIFICATION = new YangElementType("YANG_DECIMAL_64_SPECIFICATION");
   IElementType YANG_DEFAULT_STMT = new YangElementType("YANG_DEFAULT_STMT");
   IElementType YANG_DESCRIPTION_STMT = new YangElementType("YANG_DESCRIPTION_STMT");
@@ -68,16 +50,13 @@ public interface YangTypes {
   IElementType YANG_LEAF_LIST_STMT = new YangElementType("YANG_LEAF_LIST_STMT");
   IElementType YANG_LEAF_STMT = new YangElementType("YANG_LEAF_STMT");
   IElementType YANG_LENGTH_STMT = new YangElementType("YANG_LENGTH_STMT");
-  IElementType YANG_LINKAGE_STMTS = new YangElementType("YANG_LINKAGE_STMTS");
   IElementType YANG_LIST_STMT = new YangElementType("YANG_LIST_STMT");
   IElementType YANG_MANDATORY_ARG = new YangElementType("YANG_MANDATORY_ARG");
   IElementType YANG_MANDATORY_STMT = new YangElementType("YANG_MANDATORY_STMT");
   IElementType YANG_MAX_ELEMENTS_STMT = new YangElementType("YANG_MAX_ELEMENTS_STMT");
   IElementType YANG_MAX_VALUE_ARG = new YangElementType("YANG_MAX_VALUE_ARG");
-  IElementType YANG_META_STMTS = new YangElementType("YANG_META_STMTS");
   IElementType YANG_MIN_ELEMENTS_STMT = new YangElementType("YANG_MIN_ELEMENTS_STMT");
   IElementType YANG_MIN_VALUE_ARG = new YangElementType("YANG_MIN_VALUE_ARG");
-  IElementType YANG_MODULE_HEADER_STMTS = new YangElementType("YANG_MODULE_HEADER_STMTS");
   IElementType YANG_MODULE_STMT = new YangElementType("YANG_MODULE_STMT");
   IElementType YANG_MUST_STMT = new YangElementType("YANG_MUST_STMT");
   IElementType YANG_NAMESPACE_STMT = new YangElementType("YANG_NAMESPACE_STMT");
@@ -90,6 +69,7 @@ public interface YangTypes {
   IElementType YANG_PATH_STMT = new YangElementType("YANG_PATH_STMT");
   IElementType YANG_PATTERN_STMT = new YangElementType("YANG_PATTERN_STMT");
   IElementType YANG_POSITION_STMT = new YangElementType("YANG_POSITION_STMT");
+  IElementType YANG_PREFIX = new YangElementType("YANG_PREFIX");
   IElementType YANG_PREFIX_STMT = new YangElementType("YANG_PREFIX_STMT");
   IElementType YANG_PRESENCE_STMT = new YangElementType("YANG_PRESENCE_STMT");
   IElementType YANG_RANGE_STMT = new YangElementType("YANG_RANGE_STMT");
@@ -107,13 +87,14 @@ public interface YangTypes {
   IElementType YANG_REQUIRE_INSTANCE_STMT = new YangElementType("YANG_REQUIRE_INSTANCE_STMT");
   IElementType YANG_REVISION_DATE_STMT = new YangElementType("YANG_REVISION_DATE_STMT");
   IElementType YANG_REVISION_STMT = new YangElementType("YANG_REVISION_STMT");
-  IElementType YANG_REVISION_STMTS = new YangElementType("YANG_REVISION_STMTS");
   IElementType YANG_RPC_STMT = new YangElementType("YANG_RPC_STMT");
   IElementType YANG_SHORT_CASE_STMT = new YangElementType("YANG_SHORT_CASE_STMT");
+  IElementType YANG_STATEMENT = new YangElementType("YANG_STATEMENT");
   IElementType YANG_STATUS_ARG = new YangElementType("YANG_STATUS_ARG");
   IElementType YANG_STATUS_STMT = new YangElementType("YANG_STATUS_STMT");
   IElementType YANG_STMTEND = new YangElementType("YANG_STMTEND");
   IElementType YANG_STRING = new YangElementType("YANG_STRING");
+  IElementType YANG_STRING_LITERAL = new YangElementType("YANG_STRING_LITERAL");
   IElementType YANG_STRING_RESTRICTIONS = new YangElementType("YANG_STRING_RESTRICTIONS");
   IElementType YANG_SUBMODULE_HEADER_STMTS = new YangElementType("YANG_SUBMODULE_HEADER_STMTS");
   IElementType YANG_SUBMODULE_STMT = new YangElementType("YANG_SUBMODULE_STMT");
@@ -125,7 +106,6 @@ public interface YangTypes {
   IElementType YANG_UNITS_STMT = new YangElementType("YANG_UNITS_STMT");
   IElementType YANG_UNKNOWN_STATEMENT = new YangElementType("YANG_UNKNOWN_STATEMENT");
   IElementType YANG_UNKNOWN_STATEMENT_2 = new YangElementType("YANG_UNKNOWN_STATEMENT_2");
-  IElementType YANG_UNKNOWN_STATEMENT_3 = new YangElementType("YANG_UNKNOWN_STATEMENT_3");
   IElementType YANG_USES_AUGMENT_STMT = new YangElementType("YANG_USES_AUGMENT_STMT");
   IElementType YANG_USES_STMT = new YangElementType("YANG_USES_STMT");
   IElementType YANG_VALUE_STMT = new YangElementType("YANG_VALUE_STMT");
@@ -134,77 +114,95 @@ public interface YangTypes {
   IElementType YANG_YIN_ELEMENT_ARG = new YangElementType("YANG_YIN_ELEMENT_ARG");
   IElementType YANG_YIN_ELEMENT_STMT = new YangElementType("YANG_YIN_ELEMENT_STMT");
 
-  IElementType YANG_ANYXML_KEYWORD = new YangTokenType("ANYXML_KEYWORD");
-  IElementType YANG_ARGUMENT_KEYWORD = new YangTokenType("ARGUMENT_KEYWORD");
-  IElementType YANG_AUGMENT_KEYWORD = new YangTokenType("AUGMENT_KEYWORD");
-  IElementType YANG_BASE_KEYWORD = new YangTokenType("BASE_KEYWORD");
-  IElementType YANG_BELONGS_TO_KEYWORD = new YangTokenType("BELONGS_TO_KEYWORD");
-  IElementType YANG_BIT_KEYWORD = new YangTokenType("BIT_KEYWORD");
-  IElementType YANG_CASE_KEYWORD = new YangTokenType("CASE_KEYWORD");
-  IElementType YANG_CHOICE_KEYWORD = new YangTokenType("CHOICE_KEYWORD");
-  IElementType YANG_CONFIG_KEYWORD = new YangTokenType("CONFIG_KEYWORD");
-  IElementType YANG_CONTACT_KEYWORD = new YangTokenType("CONTACT_KEYWORD");
-  IElementType YANG_CONTAINER_KEYWORD = new YangTokenType("CONTAINER_KEYWORD");
-  IElementType YANG_DEFAULT_KEYWORD = new YangTokenType("DEFAULT_KEYWORD");
-  IElementType YANG_DESCRIPTION_KEYWORD = new YangTokenType("DESCRIPTION_KEYWORD");
-  IElementType YANG_DEVIATE_KEYWORD = new YangTokenType("DEVIATE_KEYWORD");
-  IElementType YANG_DEVIATION_KEYWORD = new YangTokenType("DEVIATION_KEYWORD");
-  IElementType YANG_ENUM_KEYWORD = new YangTokenType("ENUM_KEYWORD");
-  IElementType YANG_ERROR_APP_TAG_KEYWORD = new YangTokenType("ERROR_APP_TAG_KEYWORD");
-  IElementType YANG_ERROR_MESSAGE_KEYWORD = new YangTokenType("ERROR_MESSAGE_KEYWORD");
-  IElementType YANG_EXTENSION_KEYWORD = new YangTokenType("EXTENSION_KEYWORD");
-  IElementType YANG_FEATURE_KEYWORD = new YangTokenType("FEATURE_KEYWORD");
-  IElementType YANG_FRACTION_DIGITS_KEYWORD = new YangTokenType("FRACTION_DIGITS_KEYWORD");
-  IElementType YANG_GROUPING_KEYWORD = new YangTokenType("GROUPING_KEYWORD");
+  IElementType YANG_ADD_KEYWORD = new YangTokenType("add");
+  IElementType YANG_ANYXML_KEYWORD = new YangTokenType("anyxml");
+  IElementType YANG_ARGUMENT_KEYWORD = new YangTokenType("argument");
+  IElementType YANG_AUGMENT_KEYWORD = new YangTokenType("augment");
+  IElementType YANG_BASE_KEYWORD = new YangTokenType("base");
+  IElementType YANG_BELONGS_TO_KEYWORD = new YangTokenType("belongs-to");
+  IElementType YANG_BIT_KEYWORD = new YangTokenType("bit");
+  IElementType YANG_BLOCK_COMMENT = new YangTokenType("BLOCK_COMMENT");
+  IElementType YANG_CASE_KEYWORD = new YangTokenType("case");
+  IElementType YANG_CHOICE_KEYWORD = new YangTokenType("choice");
+  IElementType YANG_CONFIG_KEYWORD = new YangTokenType("config");
+  IElementType YANG_CONTACT_KEYWORD = new YangTokenType("contact");
+  IElementType YANG_CONTAINER_KEYWORD = new YangTokenType("container");
+  IElementType YANG_CURRENT_KEYWORD = new YangTokenType("current");
+  IElementType YANG_DEFAULT_KEYWORD = new YangTokenType("default");
+  IElementType YANG_DELETE_KEYWORD = new YangTokenType("delete");
+  IElementType YANG_DEPRECATED_KEYWORD = new YangTokenType("deprecated");
+  IElementType YANG_DESCRIPTION_KEYWORD = new YangTokenType("description");
+  IElementType YANG_DEVIATE_KEYWORD = new YangTokenType("deviate");
+  IElementType YANG_DEVIATION_KEYWORD = new YangTokenType("deviation");
+  IElementType YANG_DOUBLE_QUOTED_STRING = new YangTokenType("DOUBLE_QUOTED_STRING");
+  IElementType YANG_ENUM_KEYWORD = new YangTokenType("enum");
+  IElementType YANG_ERROR_APP_TAG_KEYWORD = new YangTokenType("error-app-tag");
+  IElementType YANG_ERROR_MESSAGE_KEYWORD = new YangTokenType("error-message");
+  IElementType YANG_EXTENSION_KEYWORD = new YangTokenType("extension");
+  IElementType YANG_FALSE_KEYWORD = new YangTokenType("false");
+  IElementType YANG_FEATURE_KEYWORD = new YangTokenType("feature");
+  IElementType YANG_FRACTION_DIGITS_KEYWORD = new YangTokenType("fraction-digits");
+  IElementType YANG_GROUPING_KEYWORD = new YangTokenType("grouping");
   IElementType YANG_IDENTIFIER = new YangTokenType("IDENTIFIER");
-  IElementType YANG_IDENTITY_KEYWORD = new YangTokenType("IDENTITY_KEYWORD");
-  IElementType YANG_IF_FEATURE_KEYWORD = new YangTokenType("IF_FEATURE_KEYWORD");
-  IElementType YANG_IMPORT_KEYWORD = new YangTokenType("IMPORT_KEYWORD");
-  IElementType YANG_INCLUDE_KEYWORD = new YangTokenType("INCLUDE_KEYWORD");
-  IElementType YANG_INPUT_KEYWORD = new YangTokenType("INPUT_KEYWORD");
-  IElementType YANG_KEY_KEYWORD = new YangTokenType("KEY_KEYWORD");
-  IElementType YANG_LEAF_KEYWORD = new YangTokenType("LEAF_KEYWORD");
-  IElementType YANG_LEAF_LIST_KEYWORD = new YangTokenType("LEAF_LIST_KEYWORD");
-  IElementType YANG_LEFT_BRACE = new YangTokenType("LEFT_BRACE");
-  IElementType YANG_LENGTH_KEYWORD = new YangTokenType("LENGTH_KEYWORD");
-  IElementType YANG_LIST_KEYWORD = new YangTokenType("LIST_KEYWORD");
-  IElementType YANG_MANDATORY_KEYWORD = new YangTokenType("MANDATORY_KEYWORD");
-  IElementType YANG_MAX_ELEMENTS_KEYWORD = new YangTokenType("MAX_ELEMENTS_KEYWORD");
-  IElementType YANG_MIN_ELEMENTS_KEYWORD = new YangTokenType("MIN_ELEMENTS_KEYWORD");
-  IElementType YANG_MODULE_KEYWORD = new YangTokenType("MODULE_KEYWORD");
-  IElementType YANG_MUST_KEYWORD = new YangTokenType("MUST_KEYWORD");
-  IElementType YANG_NAMESPACE_KEYWORD = new YangTokenType("NAMESPACE_KEYWORD");
-  IElementType YANG_NOTIFICATION_KEYWORD = new YangTokenType("NOTIFICATION_KEYWORD");
-  IElementType YANG_ORDERED_BY_KEYWORD = new YangTokenType("ORDERED_BY_KEYWORD");
-  IElementType YANG_ORGANIZATION_KEYWORD = new YangTokenType("ORGANIZATION_KEYWORD");
-  IElementType YANG_OUTPUT_KEYWORD = new YangTokenType("OUTPUT_KEYWORD");
-  IElementType YANG_PATH_KEYWORD = new YangTokenType("PATH_KEYWORD");
-  IElementType YANG_PATTERN_KEYWORD = new YangTokenType("PATTERN_KEYWORD");
-  IElementType YANG_PLUS = new YangTokenType("PLUS");
-  IElementType YANG_POSITION_KEYWORD = new YangTokenType("POSITION_KEYWORD");
-  IElementType YANG_PREFIX_KEYWORD = new YangTokenType("PREFIX_KEYWORD");
-  IElementType YANG_PRESENCE_KEYWORD = new YangTokenType("PRESENCE_KEYWORD");
-  IElementType YANG_RANGE_KEYWORD = new YangTokenType("RANGE_KEYWORD");
-  IElementType YANG_REFERENCE_KEYWORD = new YangTokenType("REFERENCE_KEYWORD");
-  IElementType YANG_REFINE_KEYWORD = new YangTokenType("REFINE_KEYWORD");
-  IElementType YANG_REQUIRE_INSTANCE_KEYWORD = new YangTokenType("REQUIRE_INSTANCE_KEYWORD");
-  IElementType YANG_REVISION_DATE_KEYWORD = new YangTokenType("REVISION_DATE_KEYWORD");
-  IElementType YANG_REVISION_KEYWORD = new YangTokenType("REVISION_KEYWORD");
-  IElementType YANG_RIGHT_BRACE = new YangTokenType("RIGHT_BRACE");
-  IElementType YANG_RPC_KEYWORD = new YangTokenType("RPC_KEYWORD");
-  IElementType YANG_SEMICOLON = new YangTokenType("SEMICOLON");
-  IElementType YANG_STATUS_KEYWORD = new YangTokenType("STATUS_KEYWORD");
-  IElementType YANG_STRING_LITERAL = new YangTokenType("STRING_LITERAL");
-  IElementType YANG_SUBMODULE_KEYWORD = new YangTokenType("SUBMODULE_KEYWORD");
-  IElementType YANG_TYPEDEF_KEYWORD = new YangTokenType("TYPEDEF_KEYWORD");
-  IElementType YANG_TYPE_KEYWORD = new YangTokenType("TYPE_KEYWORD");
-  IElementType YANG_UNIQUE_KEYWORD = new YangTokenType("UNIQUE_KEYWORD");
-  IElementType YANG_UNITS_KEYWORD = new YangTokenType("UNITS_KEYWORD");
-  IElementType YANG_USES_KEYWORD = new YangTokenType("USES_KEYWORD");
-  IElementType YANG_VALUE_KEYWORD = new YangTokenType("VALUE_KEYWORD");
-  IElementType YANG_WHEN_KEYWORD = new YangTokenType("WHEN_KEYWORD");
-  IElementType YANG_YANG_VERSION_KEYWORD = new YangTokenType("YANG_VERSION_KEYWORD");
-  IElementType YANG_YIN_ELEMENT_KEYWORD = new YangTokenType("YIN_ELEMENT_KEYWORD");
+  IElementType YANG_IDENTITY_KEYWORD = new YangTokenType("identity");
+  IElementType YANG_IF_FEATURE_KEYWORD = new YangTokenType("if-feature");
+  IElementType YANG_IMPORT_KEYWORD = new YangTokenType("import");
+  IElementType YANG_INCLUDE_KEYWORD = new YangTokenType("include");
+  IElementType YANG_INPUT_KEYWORD = new YangTokenType("input");
+  IElementType YANG_KEY_KEYWORD = new YangTokenType("key");
+  IElementType YANG_LEAF_KEYWORD = new YangTokenType("leaf");
+  IElementType YANG_LEAF_LIST_KEYWORD = new YangTokenType("leaf-list");
+  IElementType YANG_LEFT_BRACE = new YangTokenType("{");
+  IElementType YANG_LENGTH_KEYWORD = new YangTokenType("length");
+  IElementType YANG_LINE_COMENT = new YangTokenType("LINE_COMENT");
+  IElementType YANG_LIST_KEYWORD = new YangTokenType("list");
+  IElementType YANG_MANDATORY_KEYWORD = new YangTokenType("mandatory");
+  IElementType YANG_MAX_ELEMENTS_KEYWORD = new YangTokenType("max-elements");
+  IElementType YANG_MAX_KEYWORD = new YangTokenType("max");
+  IElementType YANG_MIN_ELEMENTS_KEYWORD = new YangTokenType("min-elements");
+  IElementType YANG_MIN_KEYWORD = new YangTokenType("min");
+  IElementType YANG_MODULE_KEYWORD = new YangTokenType("module");
+  IElementType YANG_MUST_KEYWORD = new YangTokenType("must");
+  IElementType YANG_NAMESPACE_KEYWORD = new YangTokenType("namespace");
+  IElementType YANG_NOTIFICATION_KEYWORD = new YangTokenType("notification");
+  IElementType YANG_NOT_SUPPORTED_KEYWORD = new YangTokenType("not-supported");
+  IElementType YANG_OBSOLETE_KEYWORD = new YangTokenType("obsolete");
+  IElementType YANG_ORDERED_BY_KEYWORD = new YangTokenType("ordered-by");
+  IElementType YANG_ORGANIZATION_KEYWORD = new YangTokenType("organization");
+  IElementType YANG_OUTPUT_KEYWORD = new YangTokenType("output");
+  IElementType YANG_PATH_KEYWORD = new YangTokenType("path");
+  IElementType YANG_PATTERN_KEYWORD = new YangTokenType("pattern");
+  IElementType YANG_PLUS = new YangTokenType("+");
+  IElementType YANG_POSITION_KEYWORD = new YangTokenType("position");
+  IElementType YANG_PREFIX_KEYWORD = new YangTokenType("prefix");
+  IElementType YANG_PRESENCE_KEYWORD = new YangTokenType("presence");
+  IElementType YANG_RANGE_KEYWORD = new YangTokenType("range");
+  IElementType YANG_REFERENCE_KEYWORD = new YangTokenType("reference");
+  IElementType YANG_REFINE_KEYWORD = new YangTokenType("refine");
+  IElementType YANG_REPLACE_KEYWORD = new YangTokenType("replace");
+  IElementType YANG_REQUIRE_INSTANCE_KEYWORD = new YangTokenType("require-instance");
+  IElementType YANG_REVISION_DATE_KEYWORD = new YangTokenType("revision-date");
+  IElementType YANG_REVISION_KEYWORD = new YangTokenType("revision");
+  IElementType YANG_RIGHT_BRACE = new YangTokenType("}");
+  IElementType YANG_RPC_KEYWORD = new YangTokenType("rpc");
+  IElementType YANG_SEMICOLON = new YangTokenType(";");
+  IElementType YANG_SEP = new YangTokenType(" ");
+  IElementType YANG_SINGLE_QUOTED_STRING = new YangTokenType("SINGLE_QUOTED_STRING");
+  IElementType YANG_STATUS_KEYWORD = new YangTokenType("status");
+  IElementType YANG_SUBMODULE_KEYWORD = new YangTokenType("submodule");
+  IElementType YANG_SYSTEM_KEYWORD = new YangTokenType("system");
+  IElementType YANG_TRUE_KEYWORD = new YangTokenType("true");
+  IElementType YANG_TYPEDEF_KEYWORD = new YangTokenType("typedef");
+  IElementType YANG_TYPE_KEYWORD = new YangTokenType("type");
+  IElementType YANG_UNBOUNDED_KEYWORD = new YangTokenType("unbounded");
+  IElementType YANG_UNIQUE_KEYWORD = new YangTokenType("unique");
+  IElementType YANG_UNITS_KEYWORD = new YangTokenType("units");
+  IElementType YANG_USER_KEYWORD = new YangTokenType("user");
+  IElementType YANG_USES_KEYWORD = new YangTokenType("uses");
+  IElementType YANG_VALUE_KEYWORD = new YangTokenType("value");
+  IElementType YANG_WHEN_KEYWORD = new YangTokenType("when");
+  IElementType YANG_YANG_VERSION_KEYWORD = new YangTokenType("yang-version");
+  IElementType YANG_YIN_ELEMENT_KEYWORD = new YangTokenType("yin-element");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -230,9 +228,6 @@ public interface YangTypes {
       else if (type == YANG_BIT_STMT) {
         return new YangBitStmtImpl(node);
       }
-      else if (type == YANG_BODY_STMTS) {
-        return new YangBodyStmtsImpl(node);
-      }
       else if (type == YANG_CASE_STMT) {
         return new YangCaseStmtImpl(node);
       }
@@ -250,9 +245,6 @@ public interface YangTypes {
       }
       else if (type == YANG_CONTAINER_STMT) {
         return new YangContainerStmtImpl(node);
-      }
-      else if (type == YANG_DATA_DEF_STMT) {
-        return new YangDataDefStmtImpl(node);
       }
       else if (type == YANG_DECIMAL_64_SPECIFICATION) {
         return new YangDecimal64SpecificationImpl(node);
@@ -341,9 +333,6 @@ public interface YangTypes {
       else if (type == YANG_LENGTH_STMT) {
         return new YangLengthStmtImpl(node);
       }
-      else if (type == YANG_LINKAGE_STMTS) {
-        return new YangLinkageStmtsImpl(node);
-      }
       else if (type == YANG_LIST_STMT) {
         return new YangListStmtImpl(node);
       }
@@ -359,17 +348,11 @@ public interface YangTypes {
       else if (type == YANG_MAX_VALUE_ARG) {
         return new YangMaxValueArgImpl(node);
       }
-      else if (type == YANG_META_STMTS) {
-        return new YangMetaStmtsImpl(node);
-      }
       else if (type == YANG_MIN_ELEMENTS_STMT) {
         return new YangMinElementsStmtImpl(node);
       }
       else if (type == YANG_MIN_VALUE_ARG) {
         return new YangMinValueArgImpl(node);
-      }
-      else if (type == YANG_MODULE_HEADER_STMTS) {
-        return new YangModuleHeaderStmtsImpl(node);
       }
       else if (type == YANG_MODULE_STMT) {
         return new YangModuleStmtImpl(node);
@@ -406,6 +389,9 @@ public interface YangTypes {
       }
       else if (type == YANG_POSITION_STMT) {
         return new YangPositionStmtImpl(node);
+      }
+      else if (type == YANG_PREFIX) {
+        return new YangPrefixImpl(node);
       }
       else if (type == YANG_PREFIX_STMT) {
         return new YangPrefixStmtImpl(node);
@@ -458,14 +444,11 @@ public interface YangTypes {
       else if (type == YANG_REVISION_STMT) {
         return new YangRevisionStmtImpl(node);
       }
-      else if (type == YANG_REVISION_STMTS) {
-        return new YangRevisionStmtsImpl(node);
-      }
       else if (type == YANG_RPC_STMT) {
         return new YangRpcStmtImpl(node);
       }
-      else if (type == YANG_SHORT_CASE_STMT) {
-        return new YangShortCaseStmtImpl(node);
+      else if (type == YANG_STATEMENT) {
+        return new YangStatementImpl(node);
       }
       else if (type == YANG_STATUS_ARG) {
         return new YangStatusArgImpl(node);
@@ -478,6 +461,9 @@ public interface YangTypes {
       }
       else if (type == YANG_STRING) {
         return new YangStringImpl(node);
+      }
+      else if (type == YANG_STRING_LITERAL) {
+        return new YangStringLiteralImpl(node);
       }
       else if (type == YANG_STRING_RESTRICTIONS) {
         return new YangStringRestrictionsImpl(node);
@@ -511,9 +497,6 @@ public interface YangTypes {
       }
       else if (type == YANG_UNKNOWN_STATEMENT_2) {
         return new YangUnknownStatement2Impl(node);
-      }
-      else if (type == YANG_UNKNOWN_STATEMENT_3) {
-        return new YangUnknownStatement3Impl(node);
       }
       else if (type == YANG_USES_AUGMENT_STMT) {
         return new YangUsesAugmentStmtImpl(node);

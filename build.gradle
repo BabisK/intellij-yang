@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.3.0"
+}
+
+allprojects {
+    apply plugin: 'java'
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaTargetVersion
+    tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+    sourceSets {
+        main {
+            java.srcDirs 'gen', 'src/main/java'
+            resources.srcDirs 'resources'
+        }
+    }
+
+    apply plugin: 'org.jetbrains.intellij'
+    intellij {
+        version ideaVersion
+        plugins 'coverage' //Bundled plugin dependencies
+        pluginName 'intellij-yang'
+        downloadSources Boolean.valueOf(sources)
+        sameSinceUntilBuild Boolean.valueOf(isEAP)
+    }
+}
+
+group 'org.jetbrains'
+version = "${version}.$buildNumber"
+apply plugin: 'idea'
+idea {
+    project {
+        jdkName = javaVersion
+        languageLevel = javaVersion
+        vcs = 'Git'
+    }
+
+    module {
+        generatedSourceDirs += file('gen')
+    }
+}

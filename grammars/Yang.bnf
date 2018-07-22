@@ -1,71 +1,222 @@
 {
   parserClass="com.intellij.lang.yang.parser.YangParser"
 
-  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+  implements="com.intellij.lang.yang.psi.YangCompositeElement"
+  extends="com.intellij.lang.yang.psi.impl.YangCompositeElementImpl"
 
   psiClassPrefix="Yang"
   psiImplClassSuffix="Impl"
-  psiPackage="com.intellij.lang.psi"
-  psiImplPackage="com.intellij.lang.psi.impl"
+  psiPackage="com.intellij.lang.yang.psi"
+  psiImplPackage="com.intellij.lang.yang.psi.impl"
 
   elementTypeHolderClass="com.intellij.lang.yang.psi.YangTypes"
   elementTypePrefix="YANG_"
   elementTypeClass="com.intellij.lang.yang.psi.YangElementType"
   tokenTypeClass="com.intellij.lang.yang.psi.YangTokenType"
 
+  tokens = [
+      SEP=' '
+      LEFT_BRACE='{'
+      RIGHT_BRACE='}'
+      SEMICOLON=';'
+      PLUS='+'
+      LINE_COMENT="regexp://.*"
+      BLOCK_COMMENT="regexp:/\*(.|\n)*\*/"
+
+      DOUBLE_QUOTED_STRING="regexp:\"([^\\\"])*\"?"
+      SINGLE_QUOTED_STRING="regexp:'([^\\\'\r\n]|\\[^\r\n])*'?"
+      IDENTIFIER="regexp:[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*"
+      ANYXML_KEYWORD          = 'anyxml'
+      ARGUMENT_KEYWORD        = 'argument'
+      AUGMENT_KEYWORD         = 'augment'
+      BASE_KEYWORD            = 'base'
+      BELONGS_TO_KEYWORD      = 'belongs-to'
+      BIT_KEYWORD             = 'bit'
+      CASE_KEYWORD            = 'case'
+      CHOICE_KEYWORD          = 'choice'
+      CONFIG_KEYWORD          = 'config'
+      CONTACT_KEYWORD         = 'contact'
+      CONTAINER_KEYWORD       = 'container'
+      DEFAULT_KEYWORD         = 'default'
+      DESCRIPTION_KEYWORD     = 'description'
+      ENUM_KEYWORD            = 'enum'
+      ERROR_APP_TAG_KEYWORD   = 'error-app-tag'
+      ERROR_MESSAGE_KEYWORD   = 'error-message'
+      EXTENSION_KEYWORD       = 'extension'
+      DEVIATION_KEYWORD       = 'deviation'
+      DEVIATE_KEYWORD         = 'deviate'
+      FEATURE_KEYWORD         = 'feature'
+      FRACTION_DIGITS_KEYWORD = 'fraction-digits'
+      GROUPING_KEYWORD        = 'grouping'
+      IDENTITY_KEYWORD        = 'identity'
+      IF_FEATURE_KEYWORD      = 'if-feature'
+      IMPORT_KEYWORD          = 'import'
+      INCLUDE_KEYWORD         = 'include'
+      INPUT_KEYWORD           = 'input'
+      KEY_KEYWORD             = 'key'
+      LEAF_KEYWORD            = 'leaf'
+      LEAF_LIST_KEYWORD       = 'leaf-list'
+      LENGTH_KEYWORD          = 'length'
+      LIST_KEYWORD            = 'list'
+      MANDATORY_KEYWORD       = 'mandatory'
+      MAX_ELEMENTS_KEYWORD    = 'max-elements'
+      MIN_ELEMENTS_KEYWORD    = 'min-elements'
+      MODULE_KEYWORD='module'
+      MUST_KEYWORD             = 'must'
+      NAMESPACE_KEYWORD        = 'namespace'
+      NOTIFICATION_KEYWORD     = 'notification'
+      ORDERED_BY_KEYWORD       = 'ordered-by'
+      ORGANIZATION_KEYWORD     = 'organization'
+      OUTPUT_KEYWORD           = 'output'
+      PATH_KEYWORD             = 'path'
+      PATTERN_KEYWORD          = 'pattern'
+      POSITION_KEYWORD         = 'position'
+      PREFIX_KEYWORD           = 'prefix'
+      PRESENCE_KEYWORD         = 'presence'
+      RANGE_KEYWORD            = 'range'
+      REFERENCE_KEYWORD        = 'reference'
+      REFINE_KEYWORD           = 'refine'
+      REQUIRE_INSTANCE_KEYWORD = 'require-instance'
+      REVISION_KEYWORD         = 'revision'
+      REVISION_DATE_KEYWORD    = 'revision-date'
+      RPC_KEYWORD              = 'rpc'
+      STATUS_KEYWORD           = 'status'
+      SUBMODULE_KEYWORD        = 'submodule'
+      TYPE_KEYWORD             = 'type'
+      TYPEDEF_KEYWORD          = 'typedef'
+      UNIQUE_KEYWORD           = 'unique'
+      UNITS_KEYWORD            = 'units'
+      USES_KEYWORD             = 'uses'
+      VALUE_KEYWORD            = 'value'
+      WHEN_KEYWORD             = 'when'
+      YANG_VERSION_KEYWORD     = 'yang-version'
+      YIN_ELEMENT_KEYWORD      = 'yin-element'
+      ADD_KEYWORD              = 'add'
+      CURRENT_KEYWORD          = 'current'
+      DELETE_KEYWORD           = 'delete'
+      DEPRECATED_KEYWORD       = 'deprecated'
+      FALSE_KEYWORD            = 'false'
+      MAX_KEYWORD              = 'max'
+      MIN_KEYWORD              = 'min'
+      NOT_SUPPORTED_KEYWORD    = 'not-supported'
+      OBSOLETE_KEYWORD         = 'obsolete'
+      REPLACE_KEYWORD          = 'replace'
+      SYSTEM_KEYWORD           = 'system'
+      TRUE_KEYWORD             = 'true'
+      UNBOUNDED_KEYWORD        = 'unbounded'
+      USER_KEYWORD             = 'user'
+  ]
+
+  extends(".*stmt")=Statement
+  generateTokenAccessors=true
 }
 
 yang ::= module_stmt | submodule_stmt
-string ::= STRING_LITERAL (PLUS STRING_LITERAL)*
 
-identifier_stmt ::= IDENTIFIER string? (stmtend | (LEFT_BRACE unknown_statement* RIGHT_BRACE))
-unknown_statement ::= (YIN_ELEMENT_KEYWORD | YANG_VERSION_KEYWORD | WHEN_KEYWORD | VALUE_KEYWORD | USES_KEYWORD | UNITS_KEYWORD | UNIQUE_KEYWORD |
-                    TYPEDEF_KEYWORD | TYPE_KEYWORD | SUBMODULE_KEYWORD | RPC_KEYWORD | REVISION_DATE_KEYWORD | REVISION_KEYWORD |
-                    REQUIRE_INSTANCE_KEYWORD | REFINE_KEYWORD | RANGE_KEYWORD | PRESENCE_KEYWORD | PREFIX_KEYWORD |
-                    POSITION_KEYWORD | PATTERN_KEYWORD | PATH_KEYWORD | OUTPUT_KEYWORD | ORGANIZATION_KEYWORD|  ORDERED_BY_KEYWORD | NOTIFICATION_KEYWORD|
-                    NAMESPACE_KEYWORD | MUST_KEYWORD | MODULE_KEYWORD | MIN_ELEMENTS_KEYWORD | MAX_ELEMENTS_KEYWORD | MANDATORY_KEYWORD | LIST_KEYWORD |
-                    LENGTH_KEYWORD | LEAF_LIST_KEYWORD | LEAF_KEYWORD | KEY_KEYWORD | INPUT_KEYWORD | INCLUDE_KEYWORD | IMPORT_KEYWORD | IF_FEATURE_KEYWORD |
-                    IDENTITY_KEYWORD | GROUPING_KEYWORD | FRACTION_DIGITS_KEYWORD | FEATURE_KEYWORD | DEVIATE_KEYWORD | DEVIATION_KEYWORD | EXTENSION_KEYWORD |
-                    ERROR_MESSAGE_KEYWORD | ERROR_APP_TAG_KEYWORD | ENUM_KEYWORD | DEFAULT_KEYWORD | CONTAINER_KEYWORD | CONTACT_KEYWORD |
-                    CONFIG_KEYWORD | CHOICE_KEYWORD |  CASE_KEYWORD | BIT_KEYWORD | BELONGS_TO_KEYWORD | BASE_KEYWORD | AUGMENT_KEYWORD |
-                    ANYXML_KEYWORD | IDENTIFIER) string? (SEMICOLON | (LEFT_BRACE unknown_statement2* RIGHT_BRACE))
+string_literal ::=  IDENTIFIER | SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+  | ANYXML_KEYWORD
+  | ARGUMENT_KEYWORD
+  | AUGMENT_KEYWORD
+  | BASE_KEYWORD
+  | BELONGS_TO_KEYWORD
+  | BIT_KEYWORD
+  | CASE_KEYWORD
+  | CHOICE_KEYWORD
+  | CONFIG_KEYWORD
+  | CONTACT_KEYWORD
+  | CONTAINER_KEYWORD
+  | DEFAULT_KEYWORD
+  | DESCRIPTION_KEYWORD
+  | ENUM_KEYWORD
+  | ERROR_APP_TAG_KEYWORD
+  | ERROR_MESSAGE_KEYWORD
+  | EXTENSION_KEYWORD
+  | DEVIATION_KEYWORD
+  | DEVIATE_KEYWORD
+  | FEATURE_KEYWORD
+  | FRACTION_DIGITS_KEYWORD
+  | GROUPING_KEYWORD
+  | IDENTITY_KEYWORD
+  | IF_FEATURE_KEYWORD
+  | IMPORT_KEYWORD
+  | INCLUDE_KEYWORD
+  | INPUT_KEYWORD
+  | KEY_KEYWORD
+  | LEAF_KEYWORD
+  | LEAF_LIST_KEYWORD
+  | LENGTH_KEYWORD
+  | LIST_KEYWORD
+  | MANDATORY_KEYWORD
+  | MAX_ELEMENTS_KEYWORD
+  | MIN_ELEMENTS_KEYWORD
+  | MODULE_KEYWORD
+  | MUST_KEYWORD
+  | NAMESPACE_KEYWORD
+  | NOTIFICATION_KEYWORD
+  | ORDERED_BY_KEYWORD
+  | ORGANIZATION_KEYWORD
+  | OUTPUT_KEYWORD
+  | PATH_KEYWORD
+  | PATTERN_KEYWORD
+  | POSITION_KEYWORD
+  | PREFIX_KEYWORD
+  | PRESENCE_KEYWORD
+  | RANGE_KEYWORD
+  | REFERENCE_KEYWORD
+  | REFINE_KEYWORD
+  | REQUIRE_INSTANCE_KEYWORD
+  | REVISION_KEYWORD
+  | REVISION_DATE_KEYWORD
+  | RPC_KEYWORD
+  | STATUS_KEYWORD
+  | SUBMODULE_KEYWORD
+  | TYPE_KEYWORD
+  | TYPEDEF_KEYWORD
+  | UNIQUE_KEYWORD
+  | UNITS_KEYWORD
+  | USES_KEYWORD
+  | VALUE_KEYWORD
+  | WHEN_KEYWORD
+  | YANG_VERSION_KEYWORD
+  | YIN_ELEMENT_KEYWORD
+  | ADD_KEYWORD
+  | CURRENT_KEYWORD
+  | DELETE_KEYWORD
+  | DEPRECATED_KEYWORD
+  | FALSE_KEYWORD
+  | MAX_KEYWORD
+  | MIN_KEYWORD
+  | NOT_SUPPORTED_KEYWORD
+  | OBSOLETE_KEYWORD
+  | REPLACE_KEYWORD
+  | SYSTEM_KEYWORD
+  | TRUE_KEYWORD
+  | UNBOUNDED_KEYWORD
+  | USER_KEYWORD
 
-unknown_statement2 ::= (YANG_VERSION_KEYWORD | WHEN_KEYWORD | VALUE_KEYWORD | USES_KEYWORD | UNITS_KEYWORD | UNIQUE_KEYWORD |
-                    TYPEDEF_KEYWORD | TYPE_KEYWORD | SUBMODULE_KEYWORD | STATUS_KEYWORD | RPC_KEYWORD | REVISION_DATE_KEYWORD | REVISION_KEYWORD |
-                    REQUIRE_INSTANCE_KEYWORD | REFINE_KEYWORD | REFERENCE_KEYWORD | RANGE_KEYWORD | PRESENCE_KEYWORD | PREFIX_KEYWORD |
-                    POSITION_KEYWORD | PATTERN_KEYWORD | PATH_KEYWORD | OUTPUT_KEYWORD | ORGANIZATION_KEYWORD|  ORDERED_BY_KEYWORD | NOTIFICATION_KEYWORD|
-                    NAMESPACE_KEYWORD | MUST_KEYWORD | MODULE_KEYWORD | MIN_ELEMENTS_KEYWORD | MAX_ELEMENTS_KEYWORD | MANDATORY_KEYWORD | LIST_KEYWORD |
-                    LENGTH_KEYWORD | LEAF_LIST_KEYWORD | LEAF_KEYWORD | KEY_KEYWORD | INPUT_KEYWORD | INCLUDE_KEYWORD | IMPORT_KEYWORD | IF_FEATURE_KEYWORD |
-                    IDENTITY_KEYWORD | GROUPING_KEYWORD | FRACTION_DIGITS_KEYWORD | FEATURE_KEYWORD | DEVIATE_KEYWORD | DEVIATION_KEYWORD | EXTENSION_KEYWORD |
-                    ERROR_MESSAGE_KEYWORD | ERROR_APP_TAG_KEYWORD | ENUM_KEYWORD | DESCRIPTION_KEYWORD | DEFAULT_KEYWORD | CONTAINER_KEYWORD | CONTACT_KEYWORD |
-                    CONFIG_KEYWORD | CHOICE_KEYWORD |  CASE_KEYWORD | BIT_KEYWORD | BELONGS_TO_KEYWORD | BASE_KEYWORD | AUGMENT_KEYWORD | ARGUMENT_KEYWORD |
-                    ANYXML_KEYWORD | IDENTIFIER) string? (SEMICOLON | (LEFT_BRACE unknown_statement3* RIGHT_BRACE))
+string ::= string_literal (PLUS string_literal)*
 
-unknown_statement3 ::= (YIN_ELEMENT_KEYWORD | YANG_VERSION_KEYWORD | WHEN_KEYWORD | VALUE_KEYWORD | USES_KEYWORD | UNITS_KEYWORD | UNIQUE_KEYWORD |
-                    TYPEDEF_KEYWORD | TYPE_KEYWORD | SUBMODULE_KEYWORD | STATUS_KEYWORD | RPC_KEYWORD | REVISION_DATE_KEYWORD | REVISION_KEYWORD |
-                    REQUIRE_INSTANCE_KEYWORD | REFINE_KEYWORD | REFERENCE_KEYWORD | RANGE_KEYWORD | PRESENCE_KEYWORD | PREFIX_KEYWORD |
-                    POSITION_KEYWORD | PATTERN_KEYWORD | PATH_KEYWORD | OUTPUT_KEYWORD | ORGANIZATION_KEYWORD|  ORDERED_BY_KEYWORD | NOTIFICATION_KEYWORD|
-                    NAMESPACE_KEYWORD | MUST_KEYWORD | MODULE_KEYWORD | MIN_ELEMENTS_KEYWORD | MAX_ELEMENTS_KEYWORD | MANDATORY_KEYWORD | LIST_KEYWORD |
-                    LENGTH_KEYWORD | LEAF_LIST_KEYWORD | LEAF_KEYWORD | KEY_KEYWORD | INPUT_KEYWORD | INCLUDE_KEYWORD | IMPORT_KEYWORD | IF_FEATURE_KEYWORD |
-                    IDENTITY_KEYWORD | GROUPING_KEYWORD | FRACTION_DIGITS_KEYWORD | FEATURE_KEYWORD | DEVIATE_KEYWORD | DEVIATION_KEYWORD | EXTENSION_KEYWORD |
-                    ERROR_MESSAGE_KEYWORD | ERROR_APP_TAG_KEYWORD | ENUM_KEYWORD | DESCRIPTION_KEYWORD | DEFAULT_KEYWORD | CONTAINER_KEYWORD | CONTACT_KEYWORD |
-                    CONFIG_KEYWORD | CHOICE_KEYWORD |  CASE_KEYWORD | BIT_KEYWORD | BELONGS_TO_KEYWORD | BASE_KEYWORD | AUGMENT_KEYWORD | ARGUMENT_KEYWORD |
-                    ANYXML_KEYWORD | IDENTIFIER) string? (SEMICOLON | (LEFT_BRACE unknown_statement3* RIGHT_BRACE))
+identifier_stmt ::= IDENTIFIER string? (stmtend | ('{' unknown_statement* '}'))
 
-stmtend ::= (SEMICOLON) | (LEFT_BRACE identifier_stmt? RIGHT_BRACE)
-deviate_replace_stmt ::= DEVIATE_KEYWORD string (SEMICOLON | (LEFT_BRACE (identifier_stmt |type_stmt | units_stmt | default_stmt | config_stmt | mandatory_stmt | min_elements_stmt | max_elements_stmt )* RIGHT_BRACE))
-deviate_delete_stmt ::= DEVIATE_KEYWORD string (SEMICOLON | (LEFT_BRACE (identifier_stmt |units_stmt | must_stmt | unique_stmt | default_stmt )* RIGHT_BRACE))
-deviate_add_stmt ::= DEVIATE_KEYWORD string (SEMICOLON | (LEFT_BRACE (identifier_stmt |units_stmt | must_stmt | unique_stmt | default_stmt | config_stmt | mandatory_stmt  | min_elements_stmt  | max_elements_stmt )* RIGHT_BRACE))
-deviate_not_supported_stmt ::= DEVIATE_KEYWORD string (SEMICOLON | (LEFT_BRACE identifier_stmt? RIGHT_BRACE))
-deviation_stmt ::= DEVIATION_KEYWORD string LEFT_BRACE (identifier_stmt |description_stmt | reference_stmt | deviate_not_supported_stmt | deviate_add_stmt | deviate_replace_stmt | deviate_delete_stmt)+ RIGHT_BRACE
-notification_stmt ::= NOTIFICATION_KEYWORD string (SEMICOLON | (LEFT_BRACE (identifier_stmt |if_feature_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmt )* RIGHT_BRACE))
-output_stmt ::= OUTPUT_KEYWORD LEFT_BRACE (identifier_stmt |typedef_stmt | grouping_stmt | data_def_stmt )* RIGHT_BRACE
-input_stmt ::= INPUT_KEYWORD LEFT_BRACE (identifier_stmt |typedef_stmt | grouping_stmt | data_def_stmt )* RIGHT_BRACE
-rpc_stmt ::= RPC_KEYWORD string (SEMICOLON | (LEFT_BRACE (identifier_stmt |if_feature_stmt  | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | input_stmt | output_stmt )* RIGHT_BRACE))
-when_stmt ::= WHEN_KEYWORD string (SEMICOLON | (LEFT_BRACE (identifier_stmt |description_stmt | reference_stmt )* RIGHT_BRACE))
+prefix ::= IDENTIFIER
+unknown_statement ::= prefix ':' IDENTIFIER string? (';' | ('{' unknown_statement2* '}'))
 
-augment_stmt ::= AUGMENT_KEYWORD string LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmt | case_stmt)+ RIGHT_BRACE
-uses_augment_stmt ::= AUGMENT_KEYWORD string LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmt | case_stmt)+ RIGHT_BRACE
+unknown_statement2 ::= (prefix ':')? IDENTIFIER string? (';' | ('{' unknown_statement2* '}'))
+
+stmtend ::= ';' | ('{' identifier_stmt? '}')
+deviate_replace_stmt ::= 'deviate' string (';' | ('{' (identifier_stmt |type_stmt | units_stmt | default_stmt | config_stmt | mandatory_stmt | min_elements_stmt | max_elements_stmt )* '}'))
+deviate_delete_stmt ::= 'deviate' string (';' | ('{' (identifier_stmt |units_stmt | must_stmt | unique_stmt | default_stmt )* '}'))
+deviate_add_stmt ::= 'deviate' string (';' | ('{' (identifier_stmt |units_stmt | must_stmt | unique_stmt | default_stmt | config_stmt | mandatory_stmt  | min_elements_stmt  | max_elements_stmt )* '}'))
+deviate_not_supported_stmt ::= 'deviate' string (';' | ('{' identifier_stmt? '}'))
+deviation_stmt ::= 'deviation' string '{' (identifier_stmt |description_stmt | reference_stmt | deviate_not_supported_stmt | deviate_add_stmt | deviate_replace_stmt | deviate_delete_stmt)+ '}'
+notification_stmt ::= 'notification' string (';' | ('{' (identifier_stmt |if_feature_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'))
+output_stmt ::= 'output' '{' (identifier_stmt |typedef_stmt | grouping_stmt | data_def_stmts )* '}'
+input_stmt ::= 'input' '{' (identifier_stmt |typedef_stmt | grouping_stmt | data_def_stmts )* '}'
+rpc_stmt ::= 'rpc' string (';' | ('{' (identifier_stmt |if_feature_stmt  | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | input_stmt | output_stmt )* '}'))
+when_stmt ::= 'when' string (';' | ('{' (identifier_stmt |description_stmt | reference_stmt )* '}'))
+
+augment_stmt ::= 'augment' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts | case_stmt)+ '}'
+uses_augment_stmt ::= 'augment' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts | case_stmt)+ '}'
 refine_anyxml_stmts ::= (identifier_stmt |must_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt )*
 refine_case_stmts ::= (identifier_stmt |description_stmt | reference_stmt )*
 refine_choice_stmts ::= (identifier_stmt |default_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt )*
@@ -74,86 +225,162 @@ refine_leaf_list_stmts ::= (identifier_stmt |must_stmt | config_stmt | min_eleme
 refine_leaf_stmts ::= (identifier_stmt |must_stmt | default_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt )*
 refine_container_stmts ::= (identifier_stmt |must_stmt | presence_stmt | config_stmt | description_stmt | reference_stmt )*
 refine_pom ::= (refine_container_stmts | refine_leaf_stmts | refine_leaf_list_stmts | refine_list_stmts | refine_choice_stmts | refine_case_stmts | refine_anyxml_stmts)
-refine_stmt ::= REFINE_KEYWORD string (SEMICOLON | (LEFT_BRACE  (refine_pom) RIGHT_BRACE))
-uses_stmt ::= USES_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | refine_stmt | uses_augment_stmt )* RIGHT_BRACE))
-anyxml_stmt ::= ANYXML_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | must_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
-case_stmt ::= CASE_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmt )* RIGHT_BRACE))
+refine_stmt ::= 'refine' string (';' | ('{'  (refine_pom) '}'))
+uses_stmt ::= 'uses' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | refine_stmt | uses_augment_stmt )* '}'))
+anyxml_stmt ::= 'anyxml' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | must_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
+case_stmt ::= 'case' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts )* '}'))
 short_case_stmt ::= container_stmt | leaf_stmt | leaf_list_stmt | list_stmt | anyxml_stmt
-choice_stmt ::= CHOICE_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt | short_case_stmt | case_stmt)* RIGHT_BRACE))
-unique_stmt ::= UNIQUE_KEYWORD string stmtend
-key_stmt ::= KEY_KEYWORD string stmtend
-list_stmt ::= LIST_KEYWORD string LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | must_stmt | key_stmt | unique_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmt )* RIGHT_BRACE
-leaf_list_stmt ::= LEAF_LIST_KEYWORD string LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE
-leaf_stmt ::= LEAF_KEYWORD string LEFT_BRACE  (identifier_stmt |when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE
-container_stmt ::= CONTAINER_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt | when_stmt | if_feature_stmt | must_stmt | presence_stmt | config_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmt )* RIGHT_BRACE))
-grouping_stmt ::= GROUPING_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmt )* RIGHT_BRACE))
-value_stmt ::= VALUE_KEYWORD string stmtend
+choice_stmt ::= 'choice' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt | short_case_stmt | case_stmt)* '}'))
+unique_stmt ::= 'unique' string stmtend
+key_stmt ::= 'key' string stmtend
+list_stmt ::= 'list' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | must_stmt | key_stmt | unique_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'
+leaf_list_stmt ::= 'leaf-list' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt )* '}'
+leaf_stmt ::= 'leaf' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt )* '}'
+container_stmt ::= 'container' string (';' | ('{'  (identifier_stmt | when_stmt | if_feature_stmt | must_stmt | presence_stmt | config_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'))
+grouping_stmt ::= 'grouping' string (';' | ('{'  (identifier_stmt |status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'))
+value_stmt ::= 'value' string stmtend
 max_value_arg ::= string
 min_value_arg ::= string
-max_elements_stmt ::= MAX_ELEMENTS_KEYWORD max_value_arg stmtend
-min_elements_stmt ::= MIN_ELEMENTS_KEYWORD min_value_arg stmtend
-error_app_tag_stmt ::= ERROR_APP_TAG_KEYWORD string stmtend
-error_message_stmt ::= ERROR_MESSAGE_KEYWORD string stmtend
-must_stmt ::= MUST_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
+max_elements_stmt ::= 'max-elements' max_value_arg stmtend
+min_elements_stmt ::= 'min-elements' min_value_arg stmtend
+error_app_tag_stmt ::= 'error-app-tag' string stmtend
+error_message_stmt ::= 'error-message' string stmtend
+must_stmt ::= 'must' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
 ordered_by_arg ::= string
-ordered_by_stmt ::= ORDERED_BY_KEYWORD ordered_by_arg stmtend
-presence_stmt ::= PRESENCE_KEYWORD string stmtend
-mandatory_arg ::= string
-mandatory_stmt ::= MANDATORY_KEYWORD mandatory_arg stmtend
+ordered_by_stmt ::= 'ordered-by' ordered_by_arg stmtend
+presence_stmt ::= 'presence' string stmtend
+mandatory_arg ::= ('true'|'false')
+mandatory_stmt ::= 'mandatory' mandatory_arg stmtend
 config_arg ::= string
-config_stmt ::= CONFIG_KEYWORD config_arg stmtend
+config_stmt ::= 'config' config_arg stmtend
 status_arg ::= string
-status_stmt ::= STATUS_KEYWORD status_arg stmtend
-position_stmt ::= POSITION_KEYWORD string stmtend
-bit_stmt ::= BIT_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |position_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
+status_stmt ::= 'status' status_arg stmtend
+position_stmt ::= 'position' string stmtend
+bit_stmt ::= 'bit' string (';' | ('{'  (identifier_stmt |position_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
 bits_specification ::= bit_stmt (bit_stmt | identifier_stmt)*
 union_specification ::= type_stmt (identifier_stmt | type_stmt )+
 identityref_specification ::= base_stmt
 instance_identifier_specification ::= (require_instance_stmt )?
 require_instance_arg ::= string
-require_instance_stmt ::= REQUIRE_INSTANCE_KEYWORD require_instance_arg stmtend
-path_stmt ::= PATH_KEYWORD string stmtend
+require_instance_stmt ::= 'require-instance' require_instance_arg stmtend
+path_stmt ::= 'path' string stmtend
 leafref_specification ::= path_stmt
-enum_stmt ::= ENUM_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |value_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
-enum_specification ::= enum_stmt (identifier_stmt | enum_stmt )*
-default_stmt ::= DEFAULT_KEYWORD string stmtend
-pattern_stmt ::= PATTERN_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
-length_stmt ::= LENGTH_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
+enum_stmt ::= 'enum' string (';' | ('{'  (value_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
+enum_specification ::= (enum_stmt)+
+default_stmt ::= 'default' string stmtend
+pattern_stmt ::= 'pattern' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
+length_stmt ::= 'length' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
 string_restrictions ::= (length_stmt | pattern_stmt )*
-fraction_digits_stmt ::= FRACTION_DIGITS_KEYWORD string stmtend
-decimal64_specification ::= (numerical_restrictions? (identifier_stmt)* fraction_digits_stmt | fraction_digits_stmt (identifier_stmt)* numerical_restrictions?)
-range_stmt ::= RANGE_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
+fraction_digits_stmt ::= 'fraction-digits' string stmtend
+decimal64_specification ::= fraction_digits_stmt
+range_stmt ::= 'range' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
 numerical_restrictions ::= range_stmt
-type_body_stmts ::= (identifier_stmt)* (numerical_restrictions | decimal64_specification | string_restrictions | enum_specification | leafref_specification | identityref_specification | instance_identifier_specification | bits_specification | union_specification) (identifier_stmt)*
-type_stmt ::= TYPE_KEYWORD string (SEMICOLON | (LEFT_BRACE  type_body_stmts RIGHT_BRACE))
-typedef_stmt ::= TYPEDEF_KEYWORD string LEFT_BRACE  (identifier_stmt | type_stmt | units_stmt | default_stmt | status_stmt | description_stmt | reference_stmt )+ RIGHT_BRACE
-if_feature_stmt ::= IF_FEATURE_KEYWORD string stmtend
-feature_stmt ::= FEATURE_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
-base_stmt ::= BASE_KEYWORD string stmtend
-identity_stmt ::= IDENTITY_KEYWORD string (SEMICOLON | (LEFT_BRACE  (identifier_stmt | base_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
+type_body_stmts ::= (numerical_restrictions | leafref_specification | enum_specification | decimal64_specification | string_restrictions | identityref_specification | instance_identifier_specification | bits_specification | union_specification)
+type_stmt ::= 'type' string (';' | ('{'  type_body_stmts '}'))
+typedef_stmt ::= 'typedef' string '{'  (identifier_stmt | type_stmt | units_stmt | default_stmt | status_stmt | description_stmt | reference_stmt )+ '}'
+if_feature_stmt ::= 'if-feature' string stmtend
+feature_stmt ::= 'feature' string (';' | ('{'  (identifier_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
+base_stmt ::= 'base' string stmtend
+identity_stmt ::= 'identity' string (';' | ('{'  (identifier_stmt | base_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
 yin_element_arg ::= string
-yin_element_stmt ::= YIN_ELEMENT_KEYWORD yin_element_arg stmtend
-argument_stmt ::= ARGUMENT_KEYWORD string (SEMICOLON | (LEFT_BRACE  (unknown_statement2)? (yin_element_stmt)? RIGHT_BRACE))
-extension_stmt ::= EXTENSION_KEYWORD string (SEMICOLON | (LEFT_BRACE  (unknown_statement | argument_stmt | status_stmt | description_stmt | reference_stmt )* RIGHT_BRACE))
-revision_date_stmt ::= REVISION_DATE_KEYWORD string stmtend
-revision_stmt ::= REVISION_KEYWORD string (SEMICOLON | (LEFT_BRACE  (description_stmt )? (reference_stmt )? RIGHT_BRACE))
-units_stmt ::= UNITS_KEYWORD string stmtend
-reference_stmt ::= REFERENCE_KEYWORD string stmtend
-description_stmt ::= DESCRIPTION_KEYWORD string stmtend
-contact_stmt ::= CONTACT_KEYWORD string stmtend
-organization_stmt ::= ORGANIZATION_KEYWORD string stmtend
-belongs_to_stmt ::= BELONGS_TO_KEYWORD string LEFT_BRACE  prefix_stmt  RIGHT_BRACE
-prefix_stmt ::= PREFIX_KEYWORD string stmtend
-namespace_stmt ::= NAMESPACE_KEYWORD string stmtend
-include_stmt ::= INCLUDE_KEYWORD string (SEMICOLON | (LEFT_BRACE  (revision_date_stmt )? RIGHT_BRACE))
-import_stmt ::= IMPORT_KEYWORD string LEFT_BRACE  prefix_stmt  (revision_date_stmt )? RIGHT_BRACE
-yang_version_stmt ::= YANG_VERSION_KEYWORD string stmtend
-data_def_stmt ::= container_stmt | leaf_stmt | leaf_list_stmt | list_stmt | choice_stmt | anyxml_stmt | uses_stmt
-body_stmts ::= (( identifier_stmt| extension_stmt | feature_stmt | identity_stmt | typedef_stmt | grouping_stmt | data_def_stmt | augment_stmt | rpc_stmt | notification_stmt | deviation_stmt) )*
-revision_stmts ::= (revision_stmt )*
-linkage_stmts ::= (import_stmt | include_stmt )*
-meta_stmts ::= (organization_stmt | contact_stmt | description_stmt | reference_stmt )*
+yin_element_stmt ::= 'yin-element' yin_element_arg stmtend
+argument_stmt ::= 'argument' string (';' | ('{'  (unknown_statement2)? (yin_element_stmt)? '}'))
+extension_stmt ::= 'extension' string (';' | ('{'  (unknown_statement | argument_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
+revision_date_stmt ::= 'revision-date' string stmtend
+revision_stmt ::= 'revision' string (';' | ('{'  (description_stmt )? (reference_stmt )? '}'))
+units_stmt ::= 'units' string stmtend
+reference_stmt ::= 'reference' string stmtend
+description_stmt ::= 'description' string stmtend
+contact_stmt ::= 'contact' string stmtend
+organization_stmt ::= 'organization' string stmtend
+belongs_to_stmt ::= 'belongs-to' string '{'  prefix_stmt  '}'
+prefix_stmt ::= 'prefix' string stmtend
+namespace_stmt ::= 'namespace' string stmtend
+include_stmt ::= 'include' string (';' | ('{'  (revision_date_stmt )? '}'))
+import_stmt ::= 'import' string '{'  prefix_stmt  (revision_date_stmt )? '}'
+yang_version_stmt ::= 'yang-version' string stmtend
+private data_def_stmts ::= container_stmt | leaf_stmt | leaf_list_stmt | list_stmt | choice_stmt | anyxml_stmt | uses_stmt
+private body_stmts ::= (( identifier_stmt| extension_stmt | feature_stmt | identity_stmt | typedef_stmt | grouping_stmt | data_def_stmts | augment_stmt | rpc_stmt | notification_stmt | deviation_stmt) )*
+private revision_stmts ::= (revision_stmt )*
+private linkage_stmts ::= (import_stmt | include_stmt )*
+private meta_stmts ::= (organization_stmt | contact_stmt | description_stmt | reference_stmt )*
 submodule_header_stmts ::= (yang_version_stmt | belongs_to_stmt)+
-module_header_stmts ::=   (yang_version_stmt | namespace_stmt | prefix_stmt)+
-submodule_stmt ::= SUBMODULE_KEYWORD string LEFT_BRACE  submodule_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts RIGHT_BRACE
-module_stmt ::= MODULE_KEYWORD string LEFT_BRACE  module_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts RIGHT_BRACE
+private module_header_stmts ::=  (yang_version_stmt | namespace_stmt | prefix_stmt)+
+
+submodule_stmt ::= 'submodule' string '{'  submodule_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts '}'
+module_stmt ::= 'module' string '{' module_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts '}'
+
+private Statements ::= StatementWithSemi*
+private StatementWithSemi ::= Statement (';'|&'}') { pin=1 recoverWhile=StatementRecover }
+Statement ::=
+    deviate_replace_stmt
+  | deviate_delete_stmt
+  | deviate_add_stmt
+  | deviate_not_supported_stmt
+  | deviation_stmt
+  | notification_stmt
+  | output_stmt
+  | input_stmt
+  | rpc_stmt
+  | when_stmt
+  | augment_stmt
+  | uses_augment_stmt
+  | refine_stmt
+  | uses_stmt
+  | anyxml_stmt
+  | case_stmt
+  | short_case_stmt
+  | choice_stmt
+  | unique_stmt
+  | key_stmt
+  | list_stmt
+  | leaf_list_stmt
+  | leaf_stmt
+  | container_stmt
+  | grouping_stmt
+  | value_stmt
+  | max_elements_stmt
+  | min_elements_stmt
+  | error_app_tag_stmt
+  | error_message_stmt
+  | must_stmt
+  | ordered_by_stmt
+  | presence_stmt
+  | mandatory_stmt
+  | config_stmt
+  | status_stmt
+  | position_stmt
+  | bit_stmt
+  | require_instance_stmt
+  | path_stmt
+  | enum_stmt
+  | default_stmt
+  | pattern_stmt
+  | length_stmt
+  | fraction_digits_stmt
+  | range_stmt
+  | type_stmt
+  | typedef_stmt
+  | if_feature_stmt
+  | feature_stmt
+  | base_stmt
+  | identity_stmt
+  | yin_element_stmt
+  | argument_stmt
+  | extension_stmt
+  | revision_date_stmt
+  | revision_stmt
+  | units_stmt
+  | reference_stmt
+  | description_stmt
+  | contact_stmt
+  | organization_stmt
+  | belongs_to_stmt
+  | prefix_stmt
+  | namespace_stmt
+  | include_stmt
+  | import_stmt
+  | yang_version_stmt
+  | unknown_statement
+
+private StatementRecover ::= !(';' | '{' |'}')
