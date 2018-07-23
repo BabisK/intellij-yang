@@ -1,3 +1,7 @@
+### v0.2.1
+- Fixes some formatting issues
+
+
 ### v0.2 - code formatter
 - Code Formatting
 
