@@ -15,13 +15,12 @@
   tokenTypeClass="com.intellij.lang.yang.psi.YangTokenType"
 
   tokens = [
-      SEP=' '
       LEFT_BRACE='{'
       RIGHT_BRACE='}'
       SEMICOLON=';'
       PLUS='+'
-      LINE_COMENT="regexp://.*"
-      BLOCK_COMMENT="regexp:/\*(.|\n)*\*/"
+      LINE_COMMENT="regexp://.*"
+      BLOCK_COMMENT='regexp:/\*([^*]|\*+[^*/])*(\*+/)?'
 
       DOUBLE_QUOTED_STRING="regexp:\"([^\\\"])*\"?"
       SINGLE_QUOTED_STRING="regexp:'([^\\\'\r\n]|\\[^\r\n])*'?"

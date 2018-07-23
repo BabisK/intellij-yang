@@ -154,7 +154,7 @@ public interface YangTypes {
   IElementType YANG_LEAF_LIST_KEYWORD = new YangTokenType("leaf-list");
   IElementType YANG_LEFT_BRACE = new YangTokenType("{");
   IElementType YANG_LENGTH_KEYWORD = new YangTokenType("length");
-  IElementType YANG_LINE_COMENT = new YangTokenType("LINE_COMENT");
+  IElementType YANG_LINE_COMMENT = new YangTokenType("LINE_COMMENT");
   IElementType YANG_LIST_KEYWORD = new YangTokenType("list");
   IElementType YANG_MANDATORY_KEYWORD = new YangTokenType("mandatory");
   IElementType YANG_MAX_ELEMENTS_KEYWORD = new YangTokenType("max-elements");
@@ -186,7 +186,6 @@ public interface YangTypes {
   IElementType YANG_RIGHT_BRACE = new YangTokenType("}");
   IElementType YANG_RPC_KEYWORD = new YangTokenType("rpc");
   IElementType YANG_SEMICOLON = new YangTokenType(";");
-  IElementType YANG_SEP = new YangTokenType(" ");
   IElementType YANG_SINGLE_QUOTED_STRING = new YangTokenType("SINGLE_QUOTED_STRING");
   IElementType YANG_STATUS_KEYWORD = new YangTokenType("status");
   IElementType YANG_SUBMODULE_KEYWORD = new YangTokenType("submodule");

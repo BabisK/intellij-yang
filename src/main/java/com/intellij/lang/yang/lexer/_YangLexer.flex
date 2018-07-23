@@ -25,8 +25,8 @@ import static com.intellij.lang.yang.psi.YangTypes.*;
 EOL=\R
 WHITE_SPACE=\s+
 
-LINE_COMENT="//".*
-BLOCK_COMMENT="/"\*(.|\n)*\*"/"
+LINE_COMMENT="//".*
+BLOCK_COMMENT="/"\*([^*]|\*+[^*/])*(\*+"/")?
 DOUBLE_QUOTED_STRING=\"([^\\\"])*\"?
 SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
 IDENTIFIER=[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*
@@ -35,7 +35,6 @@ IDENTIFIER=[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*
 <YYINITIAL> {
   {WHITE_SPACE}               { return WHITE_SPACE; }
 
-  " "                         { return YANG_SEP; }
   "{"                         { return YANG_LEFT_BRACE; }
   "}"                         { return YANG_RIGHT_BRACE; }
   ";"                         { return YANG_SEMICOLON; }
@@ -120,7 +119,7 @@ IDENTIFIER=[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*
   "unbounded"                 { return YANG_UNBOUNDED_KEYWORD; }
   "user"                      { return YANG_USER_KEYWORD; }
 
-  {LINE_COMENT}               { return YANG_LINE_COMENT; }
+  {LINE_COMMENT}              { return YANG_LINE_COMMENT; }
   {BLOCK_COMMENT}             { return YANG_BLOCK_COMMENT; }
   {DOUBLE_QUOTED_STRING}      { return YANG_DOUBLE_QUOTED_STRING; }
   {SINGLE_QUOTED_STRING}      { return YANG_SINGLE_QUOTED_STRING; }

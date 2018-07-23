@@ -28,8 +28,7 @@ public class YangBlock extends AbstractBlock implements BlockWithParent {
     public static final TokenSet OPEN_BRACES = TokenSet.create(YANG_LEFT_BRACE);
 
     private final Indent myIndent;
-    // lazy initialized on first call to #getSubBlocks()
-    private List<Block> mySubBlocks = null;
+
     private BlockWithParent myParent;
     private Wrap myChildWrap;
 
@@ -90,18 +89,12 @@ public class YangBlock extends AbstractBlock implements BlockWithParent {
             return EMPTY;
         }
         final ArrayList<Block> tlChildren = new ArrayList<>();
-        System.out.println("");
-        System.out.println("");
-        System.out.println("******************************************************");
-        System.out.println("parent===" + this.myNode.getText() + "===");
-        int childNum = 0;
         for (ASTNode childNode = getNode().getFirstChildNode(); childNode != null; childNode = childNode.getTreeNext()) {
             if (FormatterUtil.containsWhiteSpacesOnly(childNode)) continue;
             final YangBlock childBlock =
                     new YangBlock(childNode, createChildWrap(childNode), createChildAlignment(childNode), mySettings, myContext);
             childBlock.setParent(this);
             tlChildren.add(childBlock);
-            System.out.println("  " + ++childNum + ":" + childNode.getElementType() + ":" + childNode.getText() + "$" + childBlock.getIndent().getType().toString());
         }
         return tlChildren;
     }

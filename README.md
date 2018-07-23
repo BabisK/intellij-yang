@@ -19,6 +19,10 @@ This IntelliJ Plugin adds support for YANG.
 
 
 ## Development Environment
+Use the following checklist to ensure that you are ready to develop your custom
+- **Gradle**
+- **Plugin DevKit**
+- **Grammar-kit**
 
 This project supports Gradle build system.  
 To set up the environment, you just import the cloned project with Gradle(gradlew).  

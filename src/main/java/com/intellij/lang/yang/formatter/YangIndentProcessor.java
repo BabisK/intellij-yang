@@ -3,6 +3,7 @@ package com.intellij.lang.yang.formatter;
 import com.intellij.formatting.FormattingMode;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.yang.YangParserDefinition;
 import com.intellij.lang.yang.psi.YangStatement;
 import com.intellij.lang.yang.util.UsefulPsiTreeUtil;
 import com.intellij.psi.PsiElement;
@@ -56,6 +57,10 @@ public class YangIndentProcessor {
         }
 
         if (psi instanceof YangStatement) {
+            return Indent.getNormalIndent();
+        }
+
+        if (YangParserDefinition.COMMENTS.contains(elementType)) {
             return Indent.getNormalIndent();
         }
 
