@@ -43,12 +43,12 @@
 
   <extensions defaultExtensionNs="com.intellij">
       <fileTypeFactory implementation="com.intellij.lang.yang.YangFileTypeFactory"/>
-      <lang.parserDefinition language="Yang" implementationClass="com.intellij.lang.yang.YangParserDefinition"/>
-      <lang.syntaxHighlighterFactory language="Yang" implementationClass="com.intellij.lang.yang.editor.YangSyntaxHighlighterFactory"/>
+      <lang.parserDefinition language="YANG" implementationClass="com.intellij.lang.yang.YangParserDefinition"/>
+      <lang.syntaxHighlighterFactory language="YANG" implementationClass="com.intellij.lang.yang.editor.YangSyntaxHighlighterFactory"/>
       <colorSettingsPage implementation="com.intellij.lang.yang.editor.YangColorSettingsPage"/>
-      <completion.contributor language="Yang" implementationClass="com.intellij.lang.yang.YangCompletionContributor"/>
+      <completion.contributor language="YANG" implementationClass="com.intellij.lang.yang.YangCompletionContributor"/>
       <!--formatter-->
-      <lang.formatter language="Yang" implementationClass="com.intellij.lang.yang.formatter.YangFormattingModelBuilder"/>
+      <lang.formatter language="YANG" implementationClass="com.intellij.lang.yang.formatter.YangFormattingModelBuilder"/>
       <codeStyleSettingsProvider implementation="com.intellij.lang.yang.formatter.settings.YangCodeStyleSettingsProvider"/>
       <langCodeStyleSettingsProvider implementation="com.intellij.lang.yang.formatter.settings.YangLanguageCodeStyleSettingsProvider"/>
   </extensions>

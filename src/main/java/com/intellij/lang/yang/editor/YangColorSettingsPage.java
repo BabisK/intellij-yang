@@ -104,6 +104,6 @@ public class YangColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDisplayName() {
-        return "Yang";
+        return "YANG";
     }
 }

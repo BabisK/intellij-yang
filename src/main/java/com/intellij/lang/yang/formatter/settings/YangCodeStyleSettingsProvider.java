@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 public class YangCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
   @Override
   public String getConfigurableDisplayName() {
-    return "Yang";
+    return "YANG";
   }
 
   @NotNull

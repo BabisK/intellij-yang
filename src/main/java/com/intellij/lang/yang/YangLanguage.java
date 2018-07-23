@@ -22,6 +22,6 @@ public class YangLanguage extends Language {
     public static final YangLanguage INSTANCE = new YangLanguage();
 
     private YangLanguage() {
-        super("Yang");
+        super("YANG");
     }
 }
