@@ -9,6 +9,7 @@ import com.intellij.lang.yang.util.UsefulPsiTreeUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 import static com.intellij.lang.yang.psi.YangTypes.*;
 
@@ -16,6 +17,9 @@ import static com.intellij.lang.yang.psi.YangTypes.*;
  *
  */
 public class YangIndentProcessor {
+    public static final TokenSet LONG_VALUES = TokenSet
+            .create(YANG_DOUBLE_QUOTED_STRING);
+
     private final CommonCodeStyleSettings settings;
 
     public YangIndentProcessor(CommonCodeStyleSettings settings) {
@@ -62,6 +66,10 @@ public class YangIndentProcessor {
 
         if (YangParserDefinition.COMMENTS.contains(elementType)) {
             return Indent.getNormalIndent();
+        }
+
+        if (LONG_VALUES.contains(elementType)) {
+            return Indent.getContinuationIndent();
         }
 
         return Indent.getNoneIndent();
