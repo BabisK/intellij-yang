@@ -1,45 +1,32 @@
 intellij-yang
 =============
 
-This IntelliJ Plugin adds support for Yang.
+This IntelliJ Plugin adds support for YANG.
 
-# Features
+## Features
 
 - Syntax Highlighting
 - Rudimentary Code Completion
 - Code format
 
-# To Do
 
-- More comprehensive parsing and code completion
-- References
-- Find Usages
-- Add tests
+## Quick Start
 
-# Hacking
+1. Download .zip file from [release page](https://github.com/exjobo/intellij-yang/releases)
+2. Go *Preferences* menu, then select *Plugins* page
+3. Select *Install plugin from disk*, then choose downloaded .zip file
+4. Restart IntelliJ IDEA
 
-- Fork this repository
-- Make changes
-- Send a pull request
 
-# Development Environment
+## Development Environment
 
 This project supports Gradle build system.  
 To set up the environment, you just import the cloned project with Gradle(gradlew).  
 And you can test your own plugin by executing *runIde* Task.  
 
-# License
 
-    Copyright 2014 Red Hat Inc.
+## License
+This product is licensed under the terms of the Apache 2.0 license.
+Read [LICENSE](LICENSE) for further details.
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Please also see [NOTICE](NOTICE) for further details about the license and included code of other developers.

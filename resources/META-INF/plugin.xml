@@ -14,23 +14,26 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2">
+<idea-plugin url="https://github.com/exjobo/intellij-yang">
   <id>org.intellij.yang</id>
-  <name>Yang Language Plugin</name>
-  <version>1.0</version>
-  <vendor email="dave@dtucker.co.uk" url="http://dtucker.co.uk">Dave Tucker</vendor>
+  <name>YANG Language Plugin</name>
+  <!-- replaced by Gradle -->
+  <!-- <version>1.0</version> -->
+  <vendor email="exjobo@gmail.com">exjobo</vendor>
+  <category>Custom Languages</category>
 
   <description><![CDATA[
-      This plugin adds support for Yang to IntelliJ
+      This plugin adds support for YANG to IntelliJ
     ]]></description>
 
-  <change-notes><![CDATA[
+  <!-- replaced by Gradle -->
+  <!-- <change-notes><![CDATA[
       Nothing to report
     ]]>
-  </change-notes>
+  </change-notes> -->
 
-  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="131"/>
+    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="2018.1"/>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
