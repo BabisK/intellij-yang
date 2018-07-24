@@ -33,8 +33,8 @@ public class YangImportStmtImpl extends YangStatementImpl implements YangImportS
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangIdentifierArg getIdentifierArg() {
+    return findNotNullChildByClass(YangIdentifierArg.class);
   }
 
   @Override

@@ -10,4 +10,7 @@ public interface YangRefineLeafStmts extends YangCompositeElement {
   @NotNull
   List<YangStatement> getStatementList();
 
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
+
 }

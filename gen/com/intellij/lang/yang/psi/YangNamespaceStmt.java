@@ -11,7 +11,7 @@ public interface YangNamespaceStmt extends YangStatement {
   YangStmtend getStmtend();
 
   @NotNull
-  YangString getString();
+  YangStringLiteral getStringLiteral();
 
   @NotNull
   PsiElement getNamespaceKeyword();

@@ -26,9 +26,15 @@ public class YangStringImpl extends YangCompositeElementImpl implements YangStri
   }
 
   @Override
-  @NotNull
-  public List<YangStringLiteral> getStringLiteralList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStringLiteral.class);
+  @Nullable
+  public YangStringLiteral getStringLiteral() {
+    return findChildByClass(YangStringLiteral.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getUnquotedString() {
+    return findChildByType(YANG_UNQUOTED_STRING);
   }
 
 }

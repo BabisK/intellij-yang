@@ -11,13 +11,13 @@ public interface YangDeviateReplaceStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
-
-  @NotNull
   PsiElement getDeviateKeyword();
 
   @Nullable
   PsiElement getLeftBrace();
+
+  @NotNull
+  PsiElement getReplaceKeyword();
 
   @Nullable
   PsiElement getRightBrace();

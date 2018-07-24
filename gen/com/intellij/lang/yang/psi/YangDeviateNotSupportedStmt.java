@@ -8,16 +8,16 @@ import com.intellij.psi.PsiElement;
 public interface YangDeviateNotSupportedStmt extends YangStatement {
 
   @Nullable
-  YangIdentifierStmt getIdentifierStmt();
-
-  @NotNull
-  YangString getString();
+  YangStmtsep getStmtsep();
 
   @NotNull
   PsiElement getDeviateKeyword();
 
   @Nullable
   PsiElement getLeftBrace();
+
+  @NotNull
+  PsiElement getNotSupportedKeyword();
 
   @Nullable
   PsiElement getRightBrace();

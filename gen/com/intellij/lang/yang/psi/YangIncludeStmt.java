@@ -7,11 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface YangIncludeStmt extends YangStatement {
 
+  @NotNull
+  YangIdentifierArg getIdentifierArg();
+
   @Nullable
   YangRevisionDateStmt getRevisionDateStmt();
-
-  @NotNull
-  YangString getString();
 
   @NotNull
   PsiElement getIncludeKeyword();

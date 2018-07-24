@@ -27,8 +27,14 @@ public class YangBitsSpecificationImpl extends YangCompositeElementImpl implemen
 
   @Override
   @NotNull
-  public List<YangStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStatement.class);
+  public List<YangBitStmt> getBitStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangBitStmt.class);
+  }
+
+  @Override
+  @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
   }
 
 }

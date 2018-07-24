@@ -22,7 +22,7 @@ import static com.intellij.lang.yang.psi.YangTypes.*;
  *
  */
 public class YangBlock extends AbstractBlock implements BlockWithParent {
-    private static final Logger LOG = Logger.getInstance("#com.intellij.lang.yang.formatter.YangBlock");
+    private static final Logger LOG = Logger.getInstance(YangBlock.class);
 
     public static final TokenSet ALL_BRACES = TokenSet.create(YANG_LEFT_BRACE, YANG_RIGHT_BRACE);
     public static final TokenSet OPEN_BRACES = TokenSet.create(YANG_LEFT_BRACE);
@@ -89,12 +89,18 @@ public class YangBlock extends AbstractBlock implements BlockWithParent {
             return EMPTY;
         }
         final ArrayList<Block> tlChildren = new ArrayList<>();
+        LOG.debug("");
+        LOG.debug("");
+        LOG.debug("******************************************************");
+        LOG.debug("parent===" + this.myNode.getText() + "===");
+        int childNum= 0;
         for (ASTNode childNode = getNode().getFirstChildNode(); childNode != null; childNode = childNode.getTreeNext()) {
             if (FormatterUtil.containsWhiteSpacesOnly(childNode)) continue;
             final YangBlock childBlock =
                     new YangBlock(childNode, createChildWrap(childNode), createChildAlignment(childNode), mySettings, myContext);
             childBlock.setParent(this);
             tlChildren.add(childBlock);
+            LOG.debug("  " + ++childNum + ":" + childNode.getElementType() + ":" + childNode.getText() + "$" + childBlock.getIndent().getType().toString());
         }
         return tlChildren;
     }

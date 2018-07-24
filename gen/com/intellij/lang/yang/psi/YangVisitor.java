@@ -10,6 +10,10 @@ public class YangVisitor extends PsiElementVisitor {
     visitCompositeElement(o);
   }
 
+  public void visitAbsoluteSchemaNodeid(@NotNull YangAbsoluteSchemaNodeid o) {
+    visitCompositeElement(o);
+  }
+
   public void visitAnyxmlStmt(@NotNull YangAnyxmlStmt o) {
     visitStatement(o);
   }
@@ -70,6 +74,10 @@ public class YangVisitor extends PsiElementVisitor {
     visitStatement(o);
   }
 
+  public void visitDescendantSchemaNodeid(@NotNull YangDescendantSchemaNodeid o) {
+    visitCompositeElement(o);
+  }
+
   public void visitDescriptionStmt(@NotNull YangDescriptionStmt o) {
     visitStatement(o);
   }
@@ -126,8 +134,16 @@ public class YangVisitor extends PsiElementVisitor {
     visitStatement(o);
   }
 
-  public void visitIdentifierStmt(@NotNull YangIdentifierStmt o) {
-    visitStatement(o);
+  public void visitIdentifierArg(@NotNull YangIdentifierArg o) {
+    visitCompositeElement(o);
+  }
+
+  public void visitIdentifierLiteral(@NotNull YangIdentifierLiteral o) {
+    visitCompositeElement(o);
+  }
+
+  public void visitIdentifierRefArg(@NotNull YangIdentifierRefArg o) {
+    visitCompositeElement(o);
   }
 
   public void visitIdentityStmt(@NotNull YangIdentityStmt o) {
@@ -216,6 +232,10 @@ public class YangVisitor extends PsiElementVisitor {
 
   public void visitNamespaceStmt(@NotNull YangNamespaceStmt o) {
     visitStatement(o);
+  }
+
+  public void visitNodeIdentifier(@NotNull YangNodeIdentifier o) {
+    visitCompositeElement(o);
   }
 
   public void visitNotificationStmt(@NotNull YangNotificationStmt o) {
@@ -346,6 +366,10 @@ public class YangVisitor extends PsiElementVisitor {
     visitCompositeElement(o);
   }
 
+  public void visitStmtsep(@NotNull YangStmtsep o) {
+    visitCompositeElement(o);
+  }
+
   public void visitString(@NotNull YangString o) {
     visitCompositeElement(o);
   }
@@ -391,11 +415,11 @@ public class YangVisitor extends PsiElementVisitor {
   }
 
   public void visitUnknownStatement(@NotNull YangUnknownStatement o) {
-    visitCompositeElement(o);
+    visitStatement(o);
   }
 
   public void visitUnknownStatement2(@NotNull YangUnknownStatement2 o) {
-    visitCompositeElement(o);
+    visitStatement(o);
   }
 
   public void visitUsesAugmentStmt(@NotNull YangUsesAugmentStmt o) {
@@ -412,6 +436,10 @@ public class YangVisitor extends PsiElementVisitor {
 
   public void visitWhenStmt(@NotNull YangWhenStmt o) {
     visitStatement(o);
+  }
+
+  public void visitYangVersionArg(@NotNull YangYangVersionArg o) {
+    visitCompositeElement(o);
   }
 
   public void visitYangVersionStmt(@NotNull YangYangVersionStmt o) {

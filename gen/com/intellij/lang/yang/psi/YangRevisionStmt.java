@@ -10,6 +10,9 @@ public interface YangRevisionStmt extends YangStatement {
   @NotNull
   List<YangStatement> getStatementList();
 
+  @Nullable
+  YangStmtsep getStmtsep();
+
   @NotNull
   YangString getString();
 

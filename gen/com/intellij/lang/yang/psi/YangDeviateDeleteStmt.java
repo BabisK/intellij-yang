@@ -11,7 +11,7 @@ public interface YangDeviateDeleteStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  PsiElement getDeleteKeyword();
 
   @NotNull
   PsiElement getDeviateKeyword();

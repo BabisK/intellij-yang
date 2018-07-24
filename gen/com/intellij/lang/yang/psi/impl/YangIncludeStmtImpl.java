@@ -26,15 +26,15 @@ public class YangIncludeStmtImpl extends YangStatementImpl implements YangInclud
   }
 
   @Override
-  @Nullable
-  public YangRevisionDateStmt getRevisionDateStmt() {
-    return findChildByClass(YangRevisionDateStmt.class);
+  @NotNull
+  public YangIdentifierArg getIdentifierArg() {
+    return findNotNullChildByClass(YangIdentifierArg.class);
   }
 
   @Override
-  @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  @Nullable
+  public YangRevisionDateStmt getRevisionDateStmt() {
+    return findChildByClass(YangRevisionDateStmt.class);
   }
 
   @Override

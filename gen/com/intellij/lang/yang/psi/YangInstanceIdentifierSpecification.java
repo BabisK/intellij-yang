@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface YangInstanceIdentifierSpecification extends YangCompositeElement {
 
-  @Nullable
+  @NotNull
   YangRequireInstanceStmt getRequireInstanceStmt();
+
+  @NotNull
+  YangStmtsep getStmtsep();
 
 }

@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.intellij.lang.yang.psi.YangTypes.*;
 import com.intellij.lang.yang.psi.*;
 
-public class YangIdentifierStmtImpl extends YangStatementImpl implements YangIdentifierStmt {
+public class YangNodeIdentifierImpl extends YangCompositeElementImpl implements YangNodeIdentifier {
 
-  public YangIdentifierStmtImpl(@NotNull ASTNode node) {
+  public YangNodeIdentifierImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull YangVisitor visitor) {
-    visitor.visitIdentifierStmt(this);
+    visitor.visitNodeIdentifier(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,38 +27,20 @@ public class YangIdentifierStmtImpl extends YangStatementImpl implements YangIde
 
   @Override
   @Nullable
-  public YangStmtend getStmtend() {
-    return findChildByClass(YangStmtend.class);
+  public YangPrefix getPrefix() {
+    return findChildByClass(YangPrefix.class);
   }
 
   @Override
   @Nullable
-  public YangString getString() {
-    return findChildByClass(YangString.class);
-  }
-
-  @Override
-  @NotNull
-  public List<YangUnknownStatement> getUnknownStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangUnknownStatement.class);
+  public PsiElement getColon() {
+    return findChildByType(YANG_COLON);
   }
 
   @Override
   @NotNull
   public PsiElement getIdentifier() {
     return findNotNullChildByType(YANG_IDENTIFIER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getLeftBrace() {
-    return findChildByType(YANG_LEFT_BRACE);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getRightBrace() {
-    return findChildByType(YANG_RIGHT_BRACE);
   }
 
 }

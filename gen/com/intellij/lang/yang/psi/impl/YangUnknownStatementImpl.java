@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.intellij.lang.yang.psi.YangTypes.*;
 import com.intellij.lang.yang.psi.*;
 
-public class YangUnknownStatementImpl extends YangCompositeElementImpl implements YangUnknownStatement {
+public class YangUnknownStatementImpl extends YangStatementImpl implements YangUnknownStatement {
 
   public YangUnknownStatementImpl(@NotNull ASTNode node) {
     super(node);
@@ -27,6 +27,18 @@ public class YangUnknownStatementImpl extends YangCompositeElementImpl implement
 
   @Override
   @NotNull
+  public List<YangStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public YangIdentifierLiteral getIdentifierLiteral() {
+    return findNotNullChildByClass(YangIdentifierLiteral.class);
+  }
+
+  @Override
+  @NotNull
   public YangPrefix getPrefix() {
     return findNotNullChildByClass(YangPrefix.class);
   }
@@ -39,14 +51,8 @@ public class YangUnknownStatementImpl extends YangCompositeElementImpl implement
 
   @Override
   @NotNull
-  public List<YangUnknownStatement2> getUnknownStatement2List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangUnknownStatement2.class);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(YANG_IDENTIFIER);
+  public PsiElement getColon() {
+    return findNotNullChildByType(YANG_COLON);
   }
 
   @Override

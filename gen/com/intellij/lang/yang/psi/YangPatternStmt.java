@@ -11,6 +11,9 @@ public interface YangPatternStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
+  List<YangStmtsep> getStmtsepList();
+
+  @NotNull
   YangString getString();
 
   @Nullable

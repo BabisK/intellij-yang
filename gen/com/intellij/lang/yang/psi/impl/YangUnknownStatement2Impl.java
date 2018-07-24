@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.intellij.lang.yang.psi.YangTypes.*;
 import com.intellij.lang.yang.psi.*;
 
-public class YangUnknownStatement2Impl extends YangCompositeElementImpl implements YangUnknownStatement2 {
+public abstract class YangUnknownStatement2Impl extends YangStatementImpl implements YangUnknownStatement2 {
 
   public YangUnknownStatement2Impl(@NotNull ASTNode node) {
     super(node);
@@ -23,48 +23,6 @@ public class YangUnknownStatement2Impl extends YangCompositeElementImpl implemen
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public YangPrefix getPrefix() {
-    return findChildByClass(YangPrefix.class);
-  }
-
-  @Override
-  @Nullable
-  public YangString getString() {
-    return findChildByClass(YangString.class);
-  }
-
-  @Override
-  @NotNull
-  public List<YangUnknownStatement2> getUnknownStatement2List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangUnknownStatement2.class);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(YANG_IDENTIFIER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getLeftBrace() {
-    return findChildByType(YANG_LEFT_BRACE);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getRightBrace() {
-    return findChildByType(YANG_RIGHT_BRACE);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getSemicolon() {
-    return findChildByType(YANG_SEMICOLON);
   }
 
 }

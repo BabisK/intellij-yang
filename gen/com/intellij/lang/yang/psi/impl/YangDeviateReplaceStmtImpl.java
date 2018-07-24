@@ -33,12 +33,6 @@ public class YangDeviateReplaceStmtImpl extends YangStatementImpl implements Yan
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
-  }
-
-  @Override
-  @NotNull
   public PsiElement getDeviateKeyword() {
     return findNotNullChildByType(YANG_DEVIATE_KEYWORD);
   }
@@ -47,6 +41,12 @@ public class YangDeviateReplaceStmtImpl extends YangStatementImpl implements Yan
   @Nullable
   public PsiElement getLeftBrace() {
     return findChildByType(YANG_LEFT_BRACE);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getReplaceKeyword() {
+    return findNotNullChildByType(YANG_REPLACE_KEYWORD);
   }
 
   @Override

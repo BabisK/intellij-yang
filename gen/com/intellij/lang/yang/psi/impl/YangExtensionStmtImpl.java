@@ -33,14 +33,14 @@ public class YangExtensionStmtImpl extends YangStatementImpl implements YangExte
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
   }
 
   @Override
   @NotNull
-  public List<YangUnknownStatement> getUnknownStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangUnknownStatement.class);
+  public YangString getString() {
+    return findNotNullChildByClass(YangString.class);
   }
 
   @Override

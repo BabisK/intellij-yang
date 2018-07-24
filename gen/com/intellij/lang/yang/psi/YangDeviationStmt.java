@@ -11,7 +11,10 @@ public interface YangDeviationStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  YangAbsoluteSchemaNodeid getAbsoluteSchemaNodeid();
+
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
 
   @NotNull
   PsiElement getDeviationKeyword();

@@ -27,14 +27,8 @@ public class YangDeviateNotSupportedStmtImpl extends YangStatementImpl implement
 
   @Override
   @Nullable
-  public YangIdentifierStmt getIdentifierStmt() {
-    return findChildByClass(YangIdentifierStmt.class);
-  }
-
-  @Override
-  @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangStmtsep getStmtsep() {
+    return findChildByClass(YangStmtsep.class);
   }
 
   @Override
@@ -47,6 +41,12 @@ public class YangDeviateNotSupportedStmtImpl extends YangStatementImpl implement
   @Nullable
   public PsiElement getLeftBrace() {
     return findChildByType(YANG_LEFT_BRACE);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getNotSupportedKeyword() {
+    return findNotNullChildByType(YANG_NOT_SUPPORTED_KEYWORD);
   }
 
   @Override

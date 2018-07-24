@@ -11,7 +11,7 @@ public interface YangDeviateAddStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  PsiElement getAddKeyword();
 
   @NotNull
   PsiElement getDeviateKeyword();

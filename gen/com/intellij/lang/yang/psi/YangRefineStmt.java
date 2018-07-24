@@ -10,6 +10,9 @@ public interface YangRefineStmt extends YangStatement {
   @Nullable
   YangRefinePom getRefinePom();
 
+  @Nullable
+  YangStmtsep getStmtsep();
+
   @NotNull
   YangString getString();
 

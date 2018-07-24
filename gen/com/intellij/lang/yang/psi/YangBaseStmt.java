@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 public interface YangBaseStmt extends YangStatement {
 
   @NotNull
-  YangStmtend getStmtend();
+  YangIdentifierRefArg getIdentifierRefArg();
 
   @NotNull
-  YangString getString();
+  YangStmtend getStmtend();
 
   @NotNull
   PsiElement getBaseKeyword();

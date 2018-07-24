@@ -15,16 +15,26 @@
   tokenTypeClass="com.intellij.lang.yang.psi.YangTokenType"
 
   tokens = [
+      WSP="regexp:\s"
+      LF = "regexp:\n"
+      CRLF = "regexp:\r\n"
       LEFT_BRACE='{'
       RIGHT_BRACE='}'
+      SLASH='/'
+      COLON=':'
       SEMICOLON=';'
       PLUS='+'
       LINE_COMMENT="regexp://.*"
+      LINE_COMMENT="regexp://.*"
       BLOCK_COMMENT='regexp:/\*([^*]|\*+[^*/])*(\*+/)?'
 
-      DOUBLE_QUOTED_STRING="regexp:\"([^\\\"])*\"?"
-      SINGLE_QUOTED_STRING="regexp:'([^\\\'\r\n]|\\[^\r\n])*'?"
-      IDENTIFIER="regexp:[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*"
+      DOUBLE_QUOTED_STRING="regexp:\"([^\"])*\"?"
+      SINGLE_QUOTED_STRING="regexp:'([^\'\r\n]|\\[^\r\n])*'?"
+      IDENTIFIER="regexp:[a-zA-Z_]([a-zA-Z0-9_\-\\.])*"
+      UNQUOTED_STRING="regexp:\w+"
+      // An identifier MUST NOT start with (('X'|'x') ('M'|'m') ('L'|'l'))
+      // IDENTIFIER="regexp:[a-kn-wyzA-KN-WYZ_]([a-zA-Z0-9_\-\.])*"
+      LEAFREF_TYPE = 'leafref'
       ANYXML_KEYWORD          = 'anyxml'
       ARGUMENT_KEYWORD        = 'argument'
       AUGMENT_KEYWORD         = 'augment'
@@ -106,13 +116,18 @@
       USER_KEYWORD             = 'user'
   ]
 
-  extends(".*stmt")=Statement
+  extends(".*stmt|unknown_statement.*")=Statement
   generateTokenAccessors=true
 }
 
 yang ::= module_stmt | submodule_stmt
 
-string_literal ::=  IDENTIFIER | SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+descendant_schema_nodeid ::= node_identifier absolute_schema_nodeid*
+absolute_schema_nodeid ::= ('/' node_identifier)+
+node_identifier     ::= [prefix ":"] IDENTIFIER
+
+identifier_literal ::= IDENTIFIER
+  | LEAFREF_TYPE
   | ANYXML_KEYWORD
   | ARGUMENT_KEYWORD
   | AUGMENT_KEYWORD
@@ -193,50 +208,55 @@ string_literal ::=  IDENTIFIER | SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
   | UNBOUNDED_KEYWORD
   | USER_KEYWORD
 
-string ::= string_literal (PLUS string_literal)*
+string_literal ::=  identifier_literal | SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
 
-identifier_stmt ::= IDENTIFIER string? (stmtend | ('{' unknown_statement* '}'))
+string ::= UNQUOTED_STRING | string_literal
 
+stmtsep ::= unknown_statement*
 prefix ::= IDENTIFIER
-unknown_statement ::= prefix ':' IDENTIFIER string? (';' | ('{' unknown_statement2* '}'))
+unknown_statement ::= prefix ':' identifier_literal string? (';' | '{' unknown_statement2* '}')
+unknown_statement2 ::= Statement
 
-unknown_statement2 ::= (prefix ':')? IDENTIFIER string? (';' | ('{' unknown_statement2* '}'))
+identifier_ref_arg ::= [prefix ':'] identifier_literal
+identifier_arg ::= IDENTIFIER
+yang_version_arg  ::= "1"
 
-stmtend ::= ';' | ('{' identifier_stmt? '}')
-deviate_replace_stmt ::= 'deviate' string (';' | ('{' (identifier_stmt |type_stmt | units_stmt | default_stmt | config_stmt | mandatory_stmt | min_elements_stmt | max_elements_stmt )* '}'))
-deviate_delete_stmt ::= 'deviate' string (';' | ('{' (identifier_stmt |units_stmt | must_stmt | unique_stmt | default_stmt )* '}'))
-deviate_add_stmt ::= 'deviate' string (';' | ('{' (identifier_stmt |units_stmt | must_stmt | unique_stmt | default_stmt | config_stmt | mandatory_stmt  | min_elements_stmt  | max_elements_stmt )* '}'))
-deviate_not_supported_stmt ::= 'deviate' string (';' | ('{' identifier_stmt? '}'))
-deviation_stmt ::= 'deviation' string '{' (identifier_stmt |description_stmt | reference_stmt | deviate_not_supported_stmt | deviate_add_stmt | deviate_replace_stmt | deviate_delete_stmt)+ '}'
-notification_stmt ::= 'notification' string (';' | ('{' (identifier_stmt |if_feature_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'))
-output_stmt ::= 'output' '{' (identifier_stmt |typedef_stmt | grouping_stmt | data_def_stmts )* '}'
-input_stmt ::= 'input' '{' (identifier_stmt |typedef_stmt | grouping_stmt | data_def_stmts )* '}'
-rpc_stmt ::= 'rpc' string (';' | ('{' (identifier_stmt |if_feature_stmt  | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | input_stmt | output_stmt )* '}'))
-when_stmt ::= 'when' string (';' | ('{' (identifier_stmt |description_stmt | reference_stmt )* '}'))
 
-augment_stmt ::= 'augment' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts | case_stmt)+ '}'
-uses_augment_stmt ::= 'augment' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts | case_stmt)+ '}'
-refine_anyxml_stmts ::= (identifier_stmt |must_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt )*
-refine_case_stmts ::= (identifier_stmt |description_stmt | reference_stmt )*
-refine_choice_stmts ::= (identifier_stmt |default_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt )*
-refine_list_stmts ::= (identifier_stmt |must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | description_stmt | reference_stmt )*
-refine_leaf_list_stmts ::= (identifier_stmt |must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | description_stmt | reference_stmt )*
-refine_leaf_stmts ::= (identifier_stmt |must_stmt | default_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt )*
-refine_container_stmts ::= (identifier_stmt |must_stmt | presence_stmt | config_stmt | description_stmt | reference_stmt )*
-refine_pom ::= (refine_container_stmts | refine_leaf_stmts | refine_leaf_list_stmts | refine_list_stmts | refine_choice_stmts | refine_case_stmts | refine_anyxml_stmts)
-refine_stmt ::= 'refine' string (';' | ('{'  (refine_pom) '}'))
-uses_stmt ::= 'uses' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | refine_stmt | uses_augment_stmt )* '}'))
-anyxml_stmt ::= 'anyxml' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | must_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
-case_stmt ::= 'case' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts )* '}'))
+stmtend ::= ';' | ('{' unknown_statement? '}')
+deviate_replace_stmt ::= 'deviate' 'replace' (';' | '{' (type_stmt | units_stmt | default_stmt | config_stmt | mandatory_stmt | min_elements_stmt | max_elements_stmt )* '}')
+deviate_delete_stmt ::= 'deviate' 'delete' (';' | '{' (units_stmt | must_stmt | unique_stmt | default_stmt )* '}')
+deviate_add_stmt ::= 'deviate' 'add' (';' | '{' (units_stmt | must_stmt | unique_stmt | default_stmt | config_stmt | mandatory_stmt  | min_elements_stmt  | max_elements_stmt )* '}')
+deviate_not_supported_stmt ::= 'deviate' 'not-supported' (';' | '{' stmtsep '}')
+deviation_stmt ::= 'deviation' absolute_schema_nodeid '{' stmtsep (description_stmt stmtsep | reference_stmt stmtsep | (deviate_not_supported_stmt | (deviate_add_stmt | deviate_replace_stmt | deviate_delete_stmt)+)) '}'
+notification_stmt ::= 'notification' string (';' | '{' stmtsep ((if_feature_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts ) stmtsep)* '}')
+output_stmt ::= 'output' '{' stmtsep ((typedef_stmt | grouping_stmt | data_def_stmts) stmtsep)* '}'
+input_stmt ::= 'input' '{' stmtsep ((typedef_stmt | grouping_stmt | data_def_stmts) stmtsep)* '}'
+rpc_stmt ::= 'rpc' string (';' | '{' stmtsep ((if_feature_stmt  | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | input_stmt | output_stmt) stmtsep)* '}')
+when_stmt ::= 'when' string (';' | '{' stmtsep ((description_stmt | reference_stmt) stmtsep)* '}')
+
+augment_stmt ::= 'augment' absolute_schema_nodeid '{'  stmtsep ((when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts | case_stmt) stmtsep)* '}'
+uses_augment_stmt ::= 'augment' descendant_schema_nodeid '{'  stmtsep ((when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts | case_stmt) stmtsep)* '}'
+refine_anyxml_stmts ::= ((must_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt) stmtsep)+
+refine_case_stmts ::= ((description_stmt | reference_stmt) stmtsep)+
+refine_choice_stmts ::= ((default_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt) stmtsep )+
+refine_list_stmts ::= ((must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | description_stmt | reference_stmt) stmtsep)+
+refine_leaf_list_stmts ::= ((must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | description_stmt | reference_stmt) stmtsep)+
+refine_leaf_stmts ::= ((must_stmt | default_stmt | config_stmt | mandatory_stmt | description_stmt | reference_stmt) stmtsep)+
+refine_container_stmts ::= ((must_stmt | presence_stmt | config_stmt | description_stmt | reference_stmt) stmtsep)+
+refine_pom ::=  (refine_container_stmts | refine_leaf_stmts | refine_leaf_list_stmts | refine_list_stmts | refine_choice_stmts | refine_case_stmts | refine_anyxml_stmts)
+refine_stmt ::= 'refine' string (';' | '{' stmtsep refine_pom '}')
+uses_stmt ::= 'uses' identifier_ref_arg (';' | '{'  stmtsep ((when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | refine_stmt | uses_augment_stmt) stmtsep)* '}')
+anyxml_stmt ::= 'anyxml' string (';' | '{' stmtsep ((when_stmt | if_feature_stmt | must_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt) stmtsep)* '}')
+case_stmt ::= 'case' string (';' | '{'  stmtsep ((when_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt | data_def_stmts) stmtsep)* '}')
 short_case_stmt ::= container_stmt | leaf_stmt | leaf_list_stmt | list_stmt | anyxml_stmt
-choice_stmt ::= 'choice' string (';' | ('{'  (identifier_stmt |when_stmt | if_feature_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt | short_case_stmt | case_stmt)* '}'))
+choice_stmt ::= 'choice' string (';' | '{'  stmtsep ((when_stmt | if_feature_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt | short_case_stmt | case_stmt) stmtsep)* '}')
 unique_stmt ::= 'unique' string stmtend
 key_stmt ::= 'key' string stmtend
-list_stmt ::= 'list' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | must_stmt | key_stmt | unique_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'
-leaf_list_stmt ::= 'leaf-list' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt )* '}'
-leaf_stmt ::= 'leaf' string '{'  (identifier_stmt |when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt )* '}'
-container_stmt ::= 'container' string (';' | ('{'  (identifier_stmt | when_stmt | if_feature_stmt | must_stmt | presence_stmt | config_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'))
-grouping_stmt ::= 'grouping' string (';' | ('{'  (identifier_stmt |status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts )* '}'))
+list_stmt ::= 'list' string '{'  stmtsep ((when_stmt | if_feature_stmt | must_stmt | key_stmt | unique_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts) stmtsep )* '}'
+leaf_list_stmt ::= 'leaf-list' string '{'  stmtsep ((when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | config_stmt | min_elements_stmt | max_elements_stmt | ordered_by_stmt | status_stmt | description_stmt | reference_stmt ) stmtsep)* '}'
+leaf_stmt ::= 'leaf' string '{' stmtsep ((when_stmt | if_feature_stmt | type_stmt | units_stmt | must_stmt | default_stmt | config_stmt | mandatory_stmt | status_stmt | description_stmt | reference_stmt ) stmtsep)* '}'
+container_stmt ::= 'container' string (';' | '{' stmtsep ((when_stmt | if_feature_stmt | must_stmt | presence_stmt | config_stmt | status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts) stmtsep)* '}')
+grouping_stmt ::= 'grouping' string (';' | '{' stmtsep ((status_stmt | description_stmt | reference_stmt | typedef_stmt | grouping_stmt | data_def_stmts) stmtsep)* '}')
 value_stmt ::= 'value' string stmtend
 max_value_arg ::= string
 min_value_arg ::= string
@@ -244,7 +264,7 @@ max_elements_stmt ::= 'max-elements' max_value_arg stmtend
 min_elements_stmt ::= 'min-elements' min_value_arg stmtend
 error_app_tag_stmt ::= 'error-app-tag' string stmtend
 error_message_stmt ::= 'error-message' string stmtend
-must_stmt ::= 'must' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
+must_stmt ::= 'must' string (';' | '{' stmtsep ((error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt) stmtsep)* '}')
 ordered_by_arg ::= string
 ordered_by_stmt ::= 'ordered-by' ordered_by_arg stmtend
 presence_stmt ::= 'presence' string stmtend
@@ -255,59 +275,59 @@ config_stmt ::= 'config' config_arg stmtend
 status_arg ::= string
 status_stmt ::= 'status' status_arg stmtend
 position_stmt ::= 'position' string stmtend
-bit_stmt ::= 'bit' string (';' | ('{'  (identifier_stmt |position_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
-bits_specification ::= bit_stmt (bit_stmt | identifier_stmt)*
-union_specification ::= type_stmt (identifier_stmt | type_stmt )+
+bit_stmt ::= 'bit' string (';' | '{' stmtsep ((position_stmt | status_stmt | description_stmt | reference_stmt) stmtsep)* '}')
+bits_specification ::= (bit_stmt stmtsep)+
+union_specification ::= (type_stmt stmtsep)+
 identityref_specification ::= base_stmt
-instance_identifier_specification ::= (require_instance_stmt )?
+instance_identifier_specification ::= require_instance_stmt stmtsep
 require_instance_arg ::= string
 require_instance_stmt ::= 'require-instance' require_instance_arg stmtend
 path_stmt ::= 'path' string stmtend
 leafref_specification ::= path_stmt
-enum_stmt ::= 'enum' string (';' | ('{'  (value_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
+enum_stmt ::= 'enum' string (';' | '{' (value_stmt | status_stmt | description_stmt | reference_stmt )* '}')
 enum_specification ::= (enum_stmt)+
 default_stmt ::= 'default' string stmtend
-pattern_stmt ::= 'pattern' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
-length_stmt ::= 'length' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
-string_restrictions ::= (length_stmt | pattern_stmt )*
+pattern_stmt ::= 'pattern' string (';' | '{' stmtsep ((error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt) stmtsep)* '}')
+length_stmt ::= 'length' string (';' | '{' stmtsep ((error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt) stmtsep)* '}')
+string_restrictions ::= (length_stmt stmtsep | pattern_stmt stmtsep)+
 fraction_digits_stmt ::= 'fraction-digits' string stmtend
 decimal64_specification ::= fraction_digits_stmt
-range_stmt ::= 'range' string (';' | ('{'  (identifier_stmt |error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt )* '}'))
+range_stmt ::= 'range' string (';' | '{' stmtsep ((error_message_stmt | error_app_tag_stmt | description_stmt | reference_stmt) stmtsep)* '}')
 numerical_restrictions ::= range_stmt
-type_body_stmts ::= (numerical_restrictions | leafref_specification | enum_specification | decimal64_specification | string_restrictions | identityref_specification | instance_identifier_specification | bits_specification | union_specification)
-type_stmt ::= 'type' string (';' | ('{'  type_body_stmts '}'))
-typedef_stmt ::= 'typedef' string '{'  (identifier_stmt | type_stmt | units_stmt | default_stmt | status_stmt | description_stmt | reference_stmt )+ '}'
-if_feature_stmt ::= 'if-feature' string stmtend
-feature_stmt ::= 'feature' string (';' | ('{'  (identifier_stmt | if_feature_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
-base_stmt ::= 'base' string stmtend
-identity_stmt ::= 'identity' string (';' | ('{'  (identifier_stmt | base_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
+type_body_stmts ::= numerical_restrictions | leafref_specification | enum_specification | decimal64_specification | string_restrictions | identityref_specification | instance_identifier_specification | bits_specification | union_specification
+type_stmt ::= 'type' identifier_ref_arg (';' | '{'  type_body_stmts '}')
+typedef_stmt ::= 'typedef' string '{'  stmtsep ((type_stmt | units_stmt | default_stmt | status_stmt | description_stmt | reference_stmt) stmtsep)* '}'
+if_feature_stmt ::= 'if-feature' identifier_ref_arg stmtend
+feature_stmt ::= 'feature' string (';' | '{'  stmtsep ((if_feature_stmt | status_stmt | description_stmt | reference_stmt) stmtsep)* '}')
+base_stmt ::= 'base' identifier_ref_arg stmtend
+identity_stmt ::= 'identity' string (';' | '{' stmtsep ((base_stmt | status_stmt | description_stmt | reference_stmt) stmtsep)* '}')
 yin_element_arg ::= string
 yin_element_stmt ::= 'yin-element' yin_element_arg stmtend
-argument_stmt ::= 'argument' string (';' | ('{'  (unknown_statement2)? (yin_element_stmt)? '}'))
-extension_stmt ::= 'extension' string (';' | ('{'  (unknown_statement | argument_stmt | status_stmt | description_stmt | reference_stmt )* '}'))
+argument_stmt ::= 'argument' string (';' | '{'  (unknown_statement2)? (yin_element_stmt)? '}')
+extension_stmt ::= 'extension' string (';' | '{' stmtsep ((argument_stmt | status_stmt | description_stmt | reference_stmt) stmtsep)* '}')
 revision_date_stmt ::= 'revision-date' string stmtend
-revision_stmt ::= 'revision' string (';' | ('{'  (description_stmt )? (reference_stmt )? '}'))
+revision_stmt ::= 'revision' string (';' | '{'  (stmtsep)? (description_stmt)? (reference_stmt)? '}')
 units_stmt ::= 'units' string stmtend
 reference_stmt ::= 'reference' string stmtend
 description_stmt ::= 'description' string stmtend
 contact_stmt ::= 'contact' string stmtend
 organization_stmt ::= 'organization' string stmtend
-belongs_to_stmt ::= 'belongs-to' string '{'  prefix_stmt  '}'
+belongs_to_stmt ::= 'belongs-to' identifier_arg '{'  prefix_stmt  '}'
 prefix_stmt ::= 'prefix' string stmtend
-namespace_stmt ::= 'namespace' string stmtend
-include_stmt ::= 'include' string (';' | ('{'  (revision_date_stmt )? '}'))
-import_stmt ::= 'import' string '{'  prefix_stmt  (revision_date_stmt )? '}'
-yang_version_stmt ::= 'yang-version' string stmtend
+namespace_stmt ::= 'namespace' string_literal stmtend
+include_stmt ::= 'include' identifier_arg (';' | '{'  (revision_date_stmt )? '}')
+import_stmt ::= 'import' identifier_arg '{' prefix_stmt  (revision_date_stmt )? '}'
+yang_version_stmt ::= 'yang-version' yang_version_arg stmtend
 private data_def_stmts ::= container_stmt | leaf_stmt | leaf_list_stmt | list_stmt | choice_stmt | anyxml_stmt | uses_stmt
-private body_stmts ::= (( identifier_stmt| extension_stmt | feature_stmt | identity_stmt | typedef_stmt | grouping_stmt | data_def_stmts | augment_stmt | rpc_stmt | notification_stmt | deviation_stmt) )*
-private revision_stmts ::= (revision_stmt )*
+private body_stmts ::= ((extension_stmt | feature_stmt | identity_stmt | typedef_stmt | grouping_stmt | data_def_stmts | augment_stmt | rpc_stmt | notification_stmt | deviation_stmt) stmtsep )*
+private revision_stmts ::= (revision_stmt stmtsep)*
 private linkage_stmts ::= (import_stmt | include_stmt )*
 private meta_stmts ::= (organization_stmt | contact_stmt | description_stmt | reference_stmt )*
 submodule_header_stmts ::= (yang_version_stmt | belongs_to_stmt)+
 private module_header_stmts ::=  (yang_version_stmt | namespace_stmt | prefix_stmt)+
 
-submodule_stmt ::= 'submodule' string '{'  submodule_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts '}'
-module_stmt ::= 'module' string '{' module_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts '}'
+submodule_stmt ::= 'submodule' identifier_arg '{' submodule_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts '}'
+module_stmt ::= 'module' identifier_arg '{' module_header_stmts linkage_stmts meta_stmts revision_stmts body_stmts '}'
 
 private Statements ::= StatementWithSemi*
 private StatementWithSemi ::= Statement (';'|&'}') { pin=1 recoverWhile=StatementRecover }

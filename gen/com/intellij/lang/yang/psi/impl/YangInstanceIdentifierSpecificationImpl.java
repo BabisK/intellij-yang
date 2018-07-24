@@ -26,9 +26,15 @@ public class YangInstanceIdentifierSpecificationImpl extends YangCompositeElemen
   }
 
   @Override
-  @Nullable
+  @NotNull
   public YangRequireInstanceStmt getRequireInstanceStmt() {
-    return findChildByClass(YangRequireInstanceStmt.class);
+    return findNotNullChildByClass(YangRequireInstanceStmt.class);
+  }
+
+  @Override
+  @NotNull
+  public YangStmtsep getStmtsep() {
+    return findNotNullChildByClass(YangStmtsep.class);
   }
 
 }

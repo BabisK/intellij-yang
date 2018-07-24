@@ -33,8 +33,14 @@ public class YangUsesStmtImpl extends YangStatementImpl implements YangUsesStmt 
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangIdentifierRefArg getIdentifierRefArg() {
+    return findNotNullChildByClass(YangIdentifierRefArg.class);
+  }
+
+  @Override
+  @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
   }
 
   @Override

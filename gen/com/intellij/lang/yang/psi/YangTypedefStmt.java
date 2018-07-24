@@ -11,6 +11,9 @@ public interface YangTypedefStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
+  List<YangStmtsep> getStmtsepList();
+
+  @NotNull
   YangString getString();
 
   @NotNull

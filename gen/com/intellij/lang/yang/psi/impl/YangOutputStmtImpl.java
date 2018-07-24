@@ -33,6 +33,12 @@ public class YangOutputStmtImpl extends YangStatementImpl implements YangOutputS
 
   @Override
   @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
+  }
+
+  @Override
+  @NotNull
   public PsiElement getLeftBrace() {
     return findNotNullChildByType(YANG_LEFT_BRACE);
   }

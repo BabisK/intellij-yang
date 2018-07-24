@@ -27,8 +27,8 @@ public class YangStmtendImpl extends YangCompositeElementImpl implements YangStm
 
   @Override
   @Nullable
-  public YangIdentifierStmt getIdentifierStmt() {
-    return findChildByClass(YangIdentifierStmt.class);
+  public YangUnknownStatement getUnknownStatement() {
+    return findChildByClass(YangUnknownStatement.class);
   }
 
   @Override

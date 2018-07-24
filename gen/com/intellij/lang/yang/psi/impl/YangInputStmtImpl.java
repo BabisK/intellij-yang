@@ -33,6 +33,12 @@ public class YangInputStmtImpl extends YangStatementImpl implements YangInputStm
 
   @Override
   @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
+  }
+
+  @Override
+  @NotNull
   public PsiElement getInputKeyword() {
     return findNotNullChildByType(YANG_INPUT_KEYWORD);
   }

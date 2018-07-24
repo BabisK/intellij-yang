@@ -31,4 +31,10 @@ public class YangRefineCaseStmtsImpl extends YangCompositeElementImpl implements
     return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStatement.class);
   }
 
+  @Override
+  @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
+  }
+
 }

@@ -11,6 +11,9 @@ public interface YangNotificationStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
+  List<YangStmtsep> getStmtsepList();
+
+  @NotNull
   YangString getString();
 
   @Nullable

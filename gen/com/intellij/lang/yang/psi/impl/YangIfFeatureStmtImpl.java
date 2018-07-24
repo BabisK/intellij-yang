@@ -27,14 +27,14 @@ public class YangIfFeatureStmtImpl extends YangStatementImpl implements YangIfFe
 
   @Override
   @NotNull
-  public YangStmtend getStmtend() {
-    return findNotNullChildByClass(YangStmtend.class);
+  public YangIdentifierRefArg getIdentifierRefArg() {
+    return findNotNullChildByClass(YangIdentifierRefArg.class);
   }
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangStmtend getStmtend() {
+    return findNotNullChildByClass(YangStmtend.class);
   }
 
   @Override

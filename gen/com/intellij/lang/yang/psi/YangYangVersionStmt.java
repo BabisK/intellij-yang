@@ -11,7 +11,7 @@ public interface YangYangVersionStmt extends YangStatement {
   YangStmtend getStmtend();
 
   @NotNull
-  YangString getString();
+  YangYangVersionArg getYangVersionArg();
 
   @NotNull
   PsiElement getYangVersionKeyword();

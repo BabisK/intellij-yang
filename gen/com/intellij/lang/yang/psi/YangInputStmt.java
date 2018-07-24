@@ -11,6 +11,9 @@ public interface YangInputStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
+  List<YangStmtsep> getStmtsepList();
+
+  @NotNull
   PsiElement getInputKeyword();
 
   @NotNull

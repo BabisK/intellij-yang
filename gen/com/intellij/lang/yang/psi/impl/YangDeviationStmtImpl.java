@@ -33,8 +33,14 @@ public class YangDeviationStmtImpl extends YangStatementImpl implements YangDevi
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangAbsoluteSchemaNodeid getAbsoluteSchemaNodeid() {
+    return findNotNullChildByClass(YangAbsoluteSchemaNodeid.class);
+  }
+
+  @Override
+  @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
   }
 
   @Override

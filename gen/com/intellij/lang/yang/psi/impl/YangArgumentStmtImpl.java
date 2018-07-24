@@ -27,20 +27,14 @@ public class YangArgumentStmtImpl extends YangStatementImpl implements YangArgum
 
   @Override
   @NotNull
+  public List<YangStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStatement.class);
+  }
+
+  @Override
+  @NotNull
   public YangString getString() {
     return findNotNullChildByClass(YangString.class);
-  }
-
-  @Override
-  @Nullable
-  public YangUnknownStatement2 getUnknownStatement2() {
-    return findChildByClass(YangUnknownStatement2.class);
-  }
-
-  @Override
-  @Nullable
-  public YangYinElementStmt getYinElementStmt() {
-    return findChildByClass(YangYinElementStmt.class);
   }
 
   @Override

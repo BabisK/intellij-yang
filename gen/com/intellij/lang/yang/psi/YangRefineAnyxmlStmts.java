@@ -10,4 +10,7 @@ public interface YangRefineAnyxmlStmts extends YangCompositeElement {
   @NotNull
   List<YangStatement> getStatementList();
 
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
+
 }

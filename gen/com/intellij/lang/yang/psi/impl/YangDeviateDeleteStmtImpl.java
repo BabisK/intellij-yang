@@ -33,8 +33,8 @@ public class YangDeviateDeleteStmtImpl extends YangStatementImpl implements Yang
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public PsiElement getDeleteKeyword() {
+    return findNotNullChildByType(YANG_DELETE_KEYWORD);
   }
 
   @Override

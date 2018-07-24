@@ -11,7 +11,10 @@ public interface YangUsesAugmentStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  YangDescendantSchemaNodeid getDescendantSchemaNodeid();
+
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
 
   @NotNull
   PsiElement getAugmentKeyword();

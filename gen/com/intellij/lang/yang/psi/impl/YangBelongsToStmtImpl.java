@@ -27,14 +27,14 @@ public class YangBelongsToStmtImpl extends YangStatementImpl implements YangBelo
 
   @Override
   @NotNull
-  public YangPrefixStmt getPrefixStmt() {
-    return findNotNullChildByClass(YangPrefixStmt.class);
+  public YangIdentifierArg getIdentifierArg() {
+    return findNotNullChildByClass(YangIdentifierArg.class);
   }
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangPrefixStmt getPrefixStmt() {
+    return findNotNullChildByClass(YangPrefixStmt.class);
   }
 
   @Override

@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface YangUnionSpecification extends YangCompositeElement {
 
   @NotNull
-  List<YangStatement> getStatementList();
+  List<YangStmtsep> getStmtsepList();
+
+  @NotNull
+  List<YangTypeStmt> getTypeStmtList();
 
 }

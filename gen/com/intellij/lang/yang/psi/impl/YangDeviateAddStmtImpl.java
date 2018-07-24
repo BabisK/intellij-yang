@@ -33,8 +33,8 @@ public class YangDeviateAddStmtImpl extends YangStatementImpl implements YangDev
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public PsiElement getAddKeyword() {
+    return findNotNullChildByType(YANG_ADD_KEYWORD);
   }
 
   @Override

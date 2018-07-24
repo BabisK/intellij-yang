@@ -11,6 +11,9 @@ public interface YangContainerStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
+  List<YangStmtsep> getStmtsepList();
+
+  @NotNull
   YangString getString();
 
   @NotNull

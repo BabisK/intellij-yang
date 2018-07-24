@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface YangTypeStmt extends YangStatement {
 
   @NotNull
-  YangString getString();
+  YangIdentifierRefArg getIdentifierRefArg();
 
   @Nullable
   YangTypeBodyStmts getTypeBodyStmts();

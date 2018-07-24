@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface YangStatement extends YangCompositeElement {
 
-  @Nullable
-  YangUnknownStatement getUnknownStatement();
-
 }

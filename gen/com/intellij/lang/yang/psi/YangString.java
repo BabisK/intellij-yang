@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface YangString extends YangCompositeElement {
 
-  @NotNull
-  List<YangStringLiteral> getStringLiteralList();
+  @Nullable
+  YangStringLiteral getStringLiteral();
+
+  @Nullable
+  PsiElement getUnquotedString();
 
 }

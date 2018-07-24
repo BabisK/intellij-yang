@@ -5,7 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface YangUnknownStatement extends YangCompositeElement {
+public interface YangUnknownStatement extends YangStatement {
+
+  @NotNull
+  List<YangStatement> getStatementList();
+
+  @NotNull
+  YangIdentifierLiteral getIdentifierLiteral();
 
   @NotNull
   YangPrefix getPrefix();
@@ -14,10 +20,7 @@ public interface YangUnknownStatement extends YangCompositeElement {
   YangString getString();
 
   @NotNull
-  List<YangUnknownStatement2> getUnknownStatement2List();
-
-  @NotNull
-  PsiElement getIdentifier();
+  PsiElement getColon();
 
   @Nullable
   PsiElement getLeftBrace();

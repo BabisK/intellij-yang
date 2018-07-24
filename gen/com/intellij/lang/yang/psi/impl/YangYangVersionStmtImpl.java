@@ -33,8 +33,8 @@ public class YangYangVersionStmtImpl extends YangStatementImpl implements YangYa
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangYangVersionArg getYangVersionArg() {
+    return findNotNullChildByClass(YangYangVersionArg.class);
   }
 
   @Override

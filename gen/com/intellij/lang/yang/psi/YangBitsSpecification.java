@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface YangBitsSpecification extends YangCompositeElement {
 
   @NotNull
-  List<YangStatement> getStatementList();
+  List<YangBitStmt> getBitStmtList();
+
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
 
 }

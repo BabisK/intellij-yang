@@ -11,10 +11,10 @@ public interface YangExtensionStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  List<YangStmtsep> getStmtsepList();
 
   @NotNull
-  List<YangUnknownStatement> getUnknownStatementList();
+  YangString getString();
 
   @NotNull
   PsiElement getExtensionKeyword();

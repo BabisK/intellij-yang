@@ -11,7 +11,7 @@ public interface YangImportStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  YangIdentifierArg getIdentifierArg();
 
   @NotNull
   PsiElement getImportKeyword();

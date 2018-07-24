@@ -11,6 +11,9 @@ public interface YangOutputStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
+  List<YangStmtsep> getStmtsepList();
+
+  @NotNull
   PsiElement getLeftBrace();
 
   @NotNull

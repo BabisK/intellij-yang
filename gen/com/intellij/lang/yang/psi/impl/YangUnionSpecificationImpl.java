@@ -27,8 +27,14 @@ public class YangUnionSpecificationImpl extends YangCompositeElementImpl impleme
 
   @Override
   @NotNull
-  public List<YangStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStatement.class);
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
+  }
+
+  @Override
+  @NotNull
+  public List<YangTypeStmt> getTypeStmtList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangTypeStmt.class);
   }
 
 }

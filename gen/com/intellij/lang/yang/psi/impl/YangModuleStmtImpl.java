@@ -33,8 +33,14 @@ public class YangModuleStmtImpl extends YangStatementImpl implements YangModuleS
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangIdentifierArg getIdentifierArg() {
+    return findNotNullChildByClass(YangIdentifierArg.class);
+  }
+
+  @Override
+  @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
   }
 
   @Override

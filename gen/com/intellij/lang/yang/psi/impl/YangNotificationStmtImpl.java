@@ -33,6 +33,12 @@ public class YangNotificationStmtImpl extends YangStatementImpl implements YangN
 
   @Override
   @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
+  }
+
+  @Override
+  @NotNull
   public YangString getString() {
     return findNotNullChildByClass(YangString.class);
   }

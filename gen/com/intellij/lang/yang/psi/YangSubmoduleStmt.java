@@ -11,7 +11,10 @@ public interface YangSubmoduleStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  YangIdentifierArg getIdentifierArg();
+
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
 
   @NotNull
   YangSubmoduleHeaderStmts getSubmoduleHeaderStmts();

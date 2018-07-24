@@ -33,6 +33,12 @@ public class YangLeafListStmtImpl extends YangStatementImpl implements YangLeafL
 
   @Override
   @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
+  }
+
+  @Override
+  @NotNull
   public YangString getString() {
     return findNotNullChildByClass(YangString.class);
   }

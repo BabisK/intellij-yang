@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.intellij.lang.yang.psi.YangTypes.*;
 import com.intellij.lang.yang.psi.*;
 
-public class YangStatementImpl extends YangCompositeElementImpl implements YangStatement {
+public abstract class YangStatementImpl extends YangCompositeElementImpl implements YangStatement {
 
   public YangStatementImpl(@NotNull ASTNode node) {
     super(node);
@@ -23,12 +23,6 @@ public class YangStatementImpl extends YangCompositeElementImpl implements YangS
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public YangUnknownStatement getUnknownStatement() {
-    return findChildByClass(YangUnknownStatement.class);
   }
 
 }

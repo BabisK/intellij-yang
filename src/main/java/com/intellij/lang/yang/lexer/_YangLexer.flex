@@ -25,11 +25,15 @@ import static com.intellij.lang.yang.psi.YangTypes.*;
 EOL=\R
 WHITE_SPACE=\s+
 
+WSP=[ \t\n\x0B\f\r]
+LF=\n
+CRLF=\r\n
 LINE_COMMENT="//".*
 BLOCK_COMMENT="/"\*([^*]|\*+[^*/])*(\*+"/")?
-DOUBLE_QUOTED_STRING=\"([^\\\"])*\"?
-SINGLE_QUOTED_STRING='([^\\'\r\n]|\\[^\r\n])*'?
-IDENTIFIER=[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*
+DOUBLE_QUOTED_STRING=\"([^\"])*\"?
+SINGLE_QUOTED_STRING='([^'\r\n]|\\[^\r\n])*'?
+IDENTIFIER=[a-zA-Z_]([a-zA-Z0-9_\-\\.])*
+UNQUOTED_STRING=[a-zA-Z_0-9]+
 
 %%
 <YYINITIAL> {
@@ -37,8 +41,11 @@ IDENTIFIER=[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*
 
   "{"                         { return YANG_LEFT_BRACE; }
   "}"                         { return YANG_RIGHT_BRACE; }
+  "/"                         { return YANG_SLASH; }
+  ":"                         { return YANG_COLON; }
   ";"                         { return YANG_SEMICOLON; }
   "+"                         { return YANG_PLUS; }
+  "leafref"                   { return YANG_LEAFREF_TYPE; }
   "anyxml"                    { return YANG_ANYXML_KEYWORD; }
   "argument"                  { return YANG_ARGUMENT_KEYWORD; }
   "augment"                   { return YANG_AUGMENT_KEYWORD; }
@@ -119,11 +126,15 @@ IDENTIFIER=[.a-zA-Z_0-9\-/][a-zA-Z0-9_\-.:]*
   "unbounded"                 { return YANG_UNBOUNDED_KEYWORD; }
   "user"                      { return YANG_USER_KEYWORD; }
 
+  {WSP}                       { return YANG_WSP; }
+  {LF}                        { return YANG_LF; }
+  {CRLF}                      { return YANG_CRLF; }
   {LINE_COMMENT}              { return YANG_LINE_COMMENT; }
   {BLOCK_COMMENT}             { return YANG_BLOCK_COMMENT; }
   {DOUBLE_QUOTED_STRING}      { return YANG_DOUBLE_QUOTED_STRING; }
   {SINGLE_QUOTED_STRING}      { return YANG_SINGLE_QUOTED_STRING; }
   {IDENTIFIER}                { return YANG_IDENTIFIER; }
+  {UNQUOTED_STRING}           { return YANG_UNQUOTED_STRING; }
 
 }
 

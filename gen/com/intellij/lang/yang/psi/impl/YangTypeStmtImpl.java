@@ -27,8 +27,8 @@ public class YangTypeStmtImpl extends YangStatementImpl implements YangTypeStmt 
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangIdentifierRefArg getIdentifierRefArg() {
+    return findNotNullChildByClass(YangIdentifierRefArg.class);
   }
 
   @Override

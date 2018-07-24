@@ -33,8 +33,8 @@ public class YangNamespaceStmtImpl extends YangStatementImpl implements YangName
 
   @Override
   @NotNull
-  public YangString getString() {
-    return findNotNullChildByClass(YangString.class);
+  public YangStringLiteral getStringLiteral() {
+    return findNotNullChildByClass(YangStringLiteral.class);
   }
 
   @Override

@@ -11,7 +11,10 @@ public interface YangUsesStmt extends YangStatement {
   List<YangStatement> getStatementList();
 
   @NotNull
-  YangString getString();
+  YangIdentifierRefArg getIdentifierRefArg();
+
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
 
   @Nullable
   PsiElement getLeftBrace();
