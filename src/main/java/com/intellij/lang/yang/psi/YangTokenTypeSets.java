@@ -16,9 +16,11 @@
 
 package com.intellij.lang.yang.psi;
 
-import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.*;
 import com.intellij.lang.yang.YangLanguage;
+import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.IFileElementType;
+import com.intellij.psi.tree.TokenSet;
 
 public interface YangTokenTypeSets {
     IFileElementType YANG_FILE = new IFileElementType("YANGFILE", YangLanguage.INSTANCE);
@@ -26,7 +28,6 @@ public interface YangTokenTypeSets {
     IElementType WHITE_SPACE = TokenType.WHITE_SPACE;
     IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
     TokenSet STRINGS = TokenSet.create(YangTypes.YANG_DOUBLE_QUOTED_STRING, YangTypes.YANG_SINGLE_QUOTED_STRING, YangTypes.YANG_IDENTIFIER);
-
-
-    static IElementType COMMENT = new YangElementType("COMMENT");
+    IElementType LINE_COMMENT = new YangElementType("YANG_LINE_COMMENT");
+    IElementType BLOCK_COMMENT = new YangElementType("YANG_BLOCK_COMMENT");
  }

@@ -54,6 +54,7 @@
     <langCodeStyleSettingsProvider implementation="com.intellij.lang.yang.formatter.settings.YangLanguageCodeStyleSettingsProvider"/>
 
     <lang.commenter language="YANG" implementationClass="com.intellij.lang.yang.editor.YangCommenter"/>
+    <lang.foldingBuilder language="YANG" implementationClass="com.intellij.lang.yang.folding.YangFoldingBuilder"/>
 
   </extensions>
 
