@@ -25,6 +25,8 @@ public interface YangTokenTypeSets {
 
     IElementType WHITE_SPACE = TokenType.WHITE_SPACE;
     IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
+    TokenSet STRINGS = TokenSet.create(YangTypes.YANG_DOUBLE_QUOTED_STRING, YangTypes.YANG_SINGLE_QUOTED_STRING, YangTypes.YANG_IDENTIFIER);
+
 
     static IElementType COMMENT = new YangElementType("COMMENT");
  }

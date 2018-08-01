@@ -1,3 +1,10 @@
+### v0.2.3
+- Add commenter
+- Add Brace Macther
+
+### v0.2.2
+- Add code formatting for unknown statements
+
 ### v0.2.1
 - Fixes some formatting issues
 

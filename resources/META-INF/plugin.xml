@@ -45,6 +45,7 @@
     <fileTypeFactory implementation="com.intellij.lang.yang.YangFileTypeFactory"/>
     <lang.parserDefinition language="YANG" implementationClass="com.intellij.lang.yang.YangParserDefinition"/>
     <lang.syntaxHighlighterFactory language="YANG" implementationClass="com.intellij.lang.yang.editor.YangSyntaxHighlighterFactory"/>
+    <lang.braceMatcher language="YANG" implementationClass="com.intellij.lang.yang.editor.YangBraceMatcher"/>
     <colorSettingsPage implementation="com.intellij.lang.yang.editor.YangColorSettingsPage"/>
     <completion.contributor language="YANG" implementationClass="com.intellij.lang.yang.YangCompletionContributor"/>
     <!--formatter-->
