@@ -7,7 +7,7 @@ This IntelliJ Plugin adds support for YANG.
 
 - Syntax Highlighting
 - Rudimentary Code Completion
-- Code format
+- Code formatting
 
 
 ## Quick Start
