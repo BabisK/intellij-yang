@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.intellij.lang.yang.psi.YangTypes.*;
 import com.intellij.lang.yang.psi.*;
 
-public class YangRevisionDateStmtImpl extends YangStatementImpl implements YangRevisionDateStmt {
+public class YangDateArgStrImpl extends YangCompositeElementImpl implements YangDateArgStr {
 
-  public YangRevisionDateStmtImpl(@NotNull ASTNode node) {
+  public YangDateArgStrImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull YangVisitor visitor) {
-    visitor.visitRevisionDateStmt(this);
+    visitor.visitDateArgStr(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,20 +27,8 @@ public class YangRevisionDateStmtImpl extends YangStatementImpl implements YangR
 
   @Override
   @NotNull
-  public YangDateArgStr getDateArgStr() {
-    return findNotNullChildByClass(YangDateArgStr.class);
-  }
-
-  @Override
-  @NotNull
-  public YangStmtend getStmtend() {
-    return findNotNullChildByClass(YangStmtend.class);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getRevisionDateKeyword() {
-    return findNotNullChildByType(YANG_REVISION_DATE_KEYWORD);
+  public PsiElement getDateArg() {
+    return findNotNullChildByType(YANG_DATE_ARG);
   }
 
 }

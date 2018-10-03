@@ -68,6 +68,9 @@ public class YangParser implements PsiParser, LightPsiParser {
     else if (t == YANG_CONTAINER_STMT) {
       r = container_stmt(b, 0);
     }
+    else if (t == YANG_DATE_ARG_STR) {
+      r = date_arg_str(b, 0);
+    }
     else if (t == YANG_DECIMAL_64_SPECIFICATION) {
       r = decimal64_specification(b, 0);
     }
@@ -1283,6 +1286,18 @@ public class YangParser implements PsiParser, LightPsiParser {
     if (!r) r = choice_stmt(b, l + 1);
     if (!r) r = anyxml_stmt(b, l + 1);
     if (!r) r = uses_stmt(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DATE_ARG
+  public static boolean date_arg_str(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "date_arg_str")) return false;
+    if (!nextTokenIs(b, YANG_DATE_ARG)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, YANG_DATE_ARG);
+    exit_section_(b, m, YANG_DATE_ARG_STR, r);
     return r;
   }
 
@@ -3762,28 +3777,28 @@ public class YangParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'revision-date' string stmtend
+  // 'revision-date' date_arg_str stmtend
   public static boolean revision_date_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "revision_date_stmt")) return false;
     if (!nextTokenIs(b, YANG_REVISION_DATE_KEYWORD)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, YANG_REVISION_DATE_KEYWORD);
-    r = r && string(b, l + 1);
+    r = r && date_arg_str(b, l + 1);
     r = r && stmtend(b, l + 1);
     exit_section_(b, m, YANG_REVISION_DATE_STMT, r);
     return r;
   }
 
   /* ********************************************************** */
-  // 'revision' string (';' | '{'  (stmtsep)? (description_stmt)? (reference_stmt)? '}')
+  // 'revision' date_arg_str (';' | '{'  (stmtsep)? (description_stmt)? (reference_stmt)? '}')
   public static boolean revision_stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "revision_stmt")) return false;
     if (!nextTokenIs(b, YANG_REVISION_KEYWORD)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, YANG_REVISION_KEYWORD);
-    r = r && string(b, l + 1);
+    r = r && date_arg_str(b, l + 1);
     r = r && revision_stmt_2(b, l + 1);
     exit_section_(b, m, YANG_REVISION_STMT, r);
     return r;
