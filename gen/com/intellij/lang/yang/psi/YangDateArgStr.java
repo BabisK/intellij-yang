@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface YangRevisionDateStmt extends YangStatement {
+public interface YangDateArgStr extends YangCompositeElement {
 
   @NotNull
-  YangDateArgStr getDateArgStr();
-
-  @NotNull
-  YangStmtend getStmtend();
-
-  @NotNull
-  PsiElement getRevisionDateKeyword();
+  PsiElement getDateArg();
 
 }
