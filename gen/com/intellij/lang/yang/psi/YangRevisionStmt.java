@@ -10,11 +10,11 @@ public interface YangRevisionStmt extends YangStatement {
   @NotNull
   List<YangStatement> getStatementList();
 
+  @NotNull
+  YangDateArgStr getDateArgStr();
+
   @Nullable
   YangStmtsep getStmtsep();
-
-  @NotNull
-  YangString getString();
 
   @Nullable
   PsiElement getLeftBrace();

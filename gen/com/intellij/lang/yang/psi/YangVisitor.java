@@ -66,6 +66,10 @@ public class YangVisitor extends PsiElementVisitor {
     visitStatement(o);
   }
 
+  public void visitDateArgStr(@NotNull YangDateArgStr o) {
+    visitCompositeElement(o);
+  }
+
   public void visitDecimal64Specification(@NotNull YangDecimal64Specification o) {
     visitCompositeElement(o);
   }

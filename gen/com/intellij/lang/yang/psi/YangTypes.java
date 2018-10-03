@@ -22,6 +22,7 @@ public interface YangTypes {
   IElementType YANG_CONFIG_STMT = new YangElementType("YANG_CONFIG_STMT");
   IElementType YANG_CONTACT_STMT = new YangElementType("YANG_CONTACT_STMT");
   IElementType YANG_CONTAINER_STMT = new YangElementType("YANG_CONTAINER_STMT");
+  IElementType YANG_DATE_ARG_STR = new YangElementType("YANG_DATE_ARG_STR");
   IElementType YANG_DECIMAL_64_SPECIFICATION = new YangElementType("YANG_DECIMAL_64_SPECIFICATION");
   IElementType YANG_DEFAULT_STMT = new YangElementType("YANG_DEFAULT_STMT");
   IElementType YANG_DESCENDANT_SCHEMA_NODEID = new YangElementType("YANG_DESCENDANT_SCHEMA_NODEID");
@@ -137,6 +138,7 @@ public interface YangTypes {
   IElementType YANG_CONTAINER_KEYWORD = new YangTokenType("container");
   IElementType YANG_CRLF = new YangTokenType("CRLF");
   IElementType YANG_CURRENT_KEYWORD = new YangTokenType("current");
+  IElementType YANG_DATE_ARG = new YangTokenType("DATE_ARG");
   IElementType YANG_DEFAULT_KEYWORD = new YangTokenType("default");
   IElementType YANG_DELETE_KEYWORD = new YangTokenType("delete");
   IElementType YANG_DEPRECATED_KEYWORD = new YangTokenType("deprecated");
@@ -259,6 +261,9 @@ public interface YangTypes {
       }
       else if (type == YANG_CONTAINER_STMT) {
         return new YangContainerStmtImpl(node);
+      }
+      else if (type == YANG_DATE_ARG_STR) {
+        return new YangDateArgStrImpl(node);
       }
       else if (type == YANG_DECIMAL_64_SPECIFICATION) {
         return new YangDecimal64SpecificationImpl(node);

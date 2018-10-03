@@ -34,6 +34,7 @@ DOUBLE_QUOTED_STRING=\"([^\"])*\"?
 SINGLE_QUOTED_STRING='([^'\r\n]|\\[^\r\n])*'?
 IDENTIFIER=[a-zA-Z_]([a-zA-Z0-9_\-\\.])*
 UNQUOTED_STRING=[a-zA-Z_0-9]+
+DATE_ARG=[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}
 
 %%
 <YYINITIAL> {
@@ -135,6 +136,7 @@ UNQUOTED_STRING=[a-zA-Z_0-9]+
   {SINGLE_QUOTED_STRING}      { return YANG_SINGLE_QUOTED_STRING; }
   {IDENTIFIER}                { return YANG_IDENTIFIER; }
   {UNQUOTED_STRING}           { return YANG_UNQUOTED_STRING; }
+  {DATE_ARG}                  { return YANG_DATE_ARG; }
 
 }
 
