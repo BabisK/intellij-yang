@@ -1,3 +1,6 @@
+### v0.2.5
+- Fix revision parse error
+
 ### v0.2.4
 - Add Code Folding
 
