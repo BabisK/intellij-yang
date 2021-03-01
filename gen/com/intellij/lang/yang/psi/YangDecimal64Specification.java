@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface YangDecimal64Specification extends YangCompositeElement {
 
   @NotNull
-  YangFractionDigitsStmt getFractionDigitsStmt();
+  List<YangStatement> getStatementList();
+
+  @NotNull
+  List<YangStmtsep> getStmtsepList();
 
 }

@@ -1,3 +1,8 @@
+### v0.2.6
+- Update to Java 11
+- Support yang-version 1.1
+- support range at decimal64 type
+
 ### v0.2.5
 - Fix revision parse error
 

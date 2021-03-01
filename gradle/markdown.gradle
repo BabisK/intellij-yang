@@ -3,22 +3,23 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.vladsch.flexmark:flexmark-all:0.34.10'
+        classpath 'com.vladsch.flexmark:flexmark-all:0.62.2'
     }
 }
 
-import com.vladsch.flexmark.html.HtmlRenderer
-import com.vladsch.flexmark.parser.Parser
-import com.vladsch.flexmark.util.options.MutableDataSet
-
-ext {
-    mdToHtml = { String fileName ->
-        def options = new MutableDataSet()
-        def parser = Parser.builder(options).build()
-        def renderer = HtmlRenderer.builder(options).build()
-        return renderer.render(
-                parser.parse(
-                        file(fileName).text)
-        )
-    }
-}
+//import com.vladsch.flexmark.html.HtmlRenderer
+//import com.vladsch.flexmark.parser.Parser
+//import com.vladsch.flexmark.util.options.MutableDataSet
+//
+//ext {
+//
+//    mdToHtml = { String fileName ->
+//        def options = new MutableDataSet()
+//        def parser = Parser.builder(options).build()
+//        def renderer = HtmlRenderer.builder(options).build()
+//        return renderer.render(
+//                parser.parse(
+//                        file(fileName).text)
+//        )
+//    }
+//}

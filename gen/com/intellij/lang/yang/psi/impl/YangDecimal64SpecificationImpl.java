@@ -27,8 +27,14 @@ public class YangDecimal64SpecificationImpl extends YangCompositeElementImpl imp
 
   @Override
   @NotNull
-  public YangFractionDigitsStmt getFractionDigitsStmt() {
-    return findNotNullChildByClass(YangFractionDigitsStmt.class);
+  public List<YangStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<YangStmtsep> getStmtsepList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, YangStmtsep.class);
   }
 
 }

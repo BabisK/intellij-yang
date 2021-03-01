@@ -16,7 +16,7 @@
 
 <idea-plugin url="https://github.com/exjobo/intellij-yang">
   <id>org.intellij.yang</id>
-  <name>YANG Language Plugin</name>
+  <name>YANG Language</name>
   <!-- replaced by Gradle -->
   <!-- <version>1.0</version> -->
   <vendor email="exjobo@gmail.com">exjobo</vendor>
@@ -32,14 +32,14 @@
     ]]>
   </change-notes> -->
 
-    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="2018.1"/>
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="2020.3"/>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
-  <!-- uncomment to enable plugin in all products
+  <!--  &lt;!&ndash; uncomment to enable plugin in all products-->
   <depends>com.intellij.modules.lang</depends>
-  -->
+  <!--  &ndash;&gt;-->
 
   <extensions defaultExtensionNs="com.intellij">
     <fileTypeFactory implementation="com.intellij.lang.yang.YangFileTypeFactory"/>

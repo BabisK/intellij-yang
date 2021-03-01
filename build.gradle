@@ -6,7 +6,7 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.3.0"
+    id "org.jetbrains.intellij" version "0.4.2"
 }
 
 allprojects {
@@ -33,9 +33,9 @@ allprojects {
         sameSinceUntilBuild Boolean.valueOf(isEAP)
     }
 
-    patchPluginXml {
-        changeNotes mdToHtml('CHANGELOG.md')
-    }
+//    patchPluginXml {
+//        changeNotes mdToHtml('CHANGELOG.md')
+//    }
 }
 
 group 'org.jetbrains'

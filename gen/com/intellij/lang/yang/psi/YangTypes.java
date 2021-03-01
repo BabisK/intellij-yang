@@ -220,7 +220,7 @@ public interface YangTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-       if (type == YANG_ABSOLUTE_SCHEMA_NODEID) {
+      if (type == YANG_ABSOLUTE_SCHEMA_NODEID) {
         return new YangAbsoluteSchemaNodeidImpl(node);
       }
       else if (type == YANG_ANYXML_STMT) {

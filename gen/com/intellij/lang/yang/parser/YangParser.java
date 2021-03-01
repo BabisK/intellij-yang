@@ -23,352 +23,15 @@ public class YangParser implements PsiParser, LightPsiParser {
     boolean r;
     b = adapt_builder_(t, b, this, EXTENDS_SETS_);
     Marker m = enter_section_(b, 0, _COLLAPSE_, null);
-    if (t == YANG_STATEMENT) {
-      r = Statement(b, 0);
-    }
-    else if (t == YANG_ABSOLUTE_SCHEMA_NODEID) {
-      r = absolute_schema_nodeid(b, 0);
-    }
-    else if (t == YANG_ANYXML_STMT) {
-      r = anyxml_stmt(b, 0);
-    }
-    else if (t == YANG_ARGUMENT_STMT) {
-      r = argument_stmt(b, 0);
-    }
-    else if (t == YANG_AUGMENT_STMT) {
-      r = augment_stmt(b, 0);
-    }
-    else if (t == YANG_BASE_STMT) {
-      r = base_stmt(b, 0);
-    }
-    else if (t == YANG_BELONGS_TO_STMT) {
-      r = belongs_to_stmt(b, 0);
-    }
-    else if (t == YANG_BIT_STMT) {
-      r = bit_stmt(b, 0);
-    }
-    else if (t == YANG_BITS_SPECIFICATION) {
-      r = bits_specification(b, 0);
-    }
-    else if (t == YANG_CASE_STMT) {
-      r = case_stmt(b, 0);
-    }
-    else if (t == YANG_CHOICE_STMT) {
-      r = choice_stmt(b, 0);
-    }
-    else if (t == YANG_CONFIG_ARG) {
-      r = config_arg(b, 0);
-    }
-    else if (t == YANG_CONFIG_STMT) {
-      r = config_stmt(b, 0);
-    }
-    else if (t == YANG_CONTACT_STMT) {
-      r = contact_stmt(b, 0);
-    }
-    else if (t == YANG_CONTAINER_STMT) {
-      r = container_stmt(b, 0);
-    }
-    else if (t == YANG_DATE_ARG_STR) {
-      r = date_arg_str(b, 0);
-    }
-    else if (t == YANG_DECIMAL_64_SPECIFICATION) {
-      r = decimal64_specification(b, 0);
-    }
-    else if (t == YANG_DEFAULT_STMT) {
-      r = default_stmt(b, 0);
-    }
-    else if (t == YANG_DESCENDANT_SCHEMA_NODEID) {
-      r = descendant_schema_nodeid(b, 0);
-    }
-    else if (t == YANG_DESCRIPTION_STMT) {
-      r = description_stmt(b, 0);
-    }
-    else if (t == YANG_DEVIATE_ADD_STMT) {
-      r = deviate_add_stmt(b, 0);
-    }
-    else if (t == YANG_DEVIATE_DELETE_STMT) {
-      r = deviate_delete_stmt(b, 0);
-    }
-    else if (t == YANG_DEVIATE_NOT_SUPPORTED_STMT) {
-      r = deviate_not_supported_stmt(b, 0);
-    }
-    else if (t == YANG_DEVIATE_REPLACE_STMT) {
-      r = deviate_replace_stmt(b, 0);
-    }
-    else if (t == YANG_DEVIATION_STMT) {
-      r = deviation_stmt(b, 0);
-    }
-    else if (t == YANG_ENUM_SPECIFICATION) {
-      r = enum_specification(b, 0);
-    }
-    else if (t == YANG_ENUM_STMT) {
-      r = enum_stmt(b, 0);
-    }
-    else if (t == YANG_ERROR_APP_TAG_STMT) {
-      r = error_app_tag_stmt(b, 0);
-    }
-    else if (t == YANG_ERROR_MESSAGE_STMT) {
-      r = error_message_stmt(b, 0);
-    }
-    else if (t == YANG_EXTENSION_STMT) {
-      r = extension_stmt(b, 0);
-    }
-    else if (t == YANG_FEATURE_STMT) {
-      r = feature_stmt(b, 0);
-    }
-    else if (t == YANG_FRACTION_DIGITS_STMT) {
-      r = fraction_digits_stmt(b, 0);
-    }
-    else if (t == YANG_GROUPING_STMT) {
-      r = grouping_stmt(b, 0);
-    }
-    else if (t == YANG_IDENTIFIER_ARG) {
-      r = identifier_arg(b, 0);
-    }
-    else if (t == YANG_IDENTIFIER_LITERAL) {
-      r = identifier_literal(b, 0);
-    }
-    else if (t == YANG_IDENTIFIER_REF_ARG) {
-      r = identifier_ref_arg(b, 0);
-    }
-    else if (t == YANG_IDENTITY_STMT) {
-      r = identity_stmt(b, 0);
-    }
-    else if (t == YANG_IDENTITYREF_SPECIFICATION) {
-      r = identityref_specification(b, 0);
-    }
-    else if (t == YANG_IF_FEATURE_STMT) {
-      r = if_feature_stmt(b, 0);
-    }
-    else if (t == YANG_IMPORT_STMT) {
-      r = import_stmt(b, 0);
-    }
-    else if (t == YANG_INCLUDE_STMT) {
-      r = include_stmt(b, 0);
-    }
-    else if (t == YANG_INPUT_STMT) {
-      r = input_stmt(b, 0);
-    }
-    else if (t == YANG_INSTANCE_IDENTIFIER_SPECIFICATION) {
-      r = instance_identifier_specification(b, 0);
-    }
-    else if (t == YANG_KEY_STMT) {
-      r = key_stmt(b, 0);
-    }
-    else if (t == YANG_LEAF_LIST_STMT) {
-      r = leaf_list_stmt(b, 0);
-    }
-    else if (t == YANG_LEAF_STMT) {
-      r = leaf_stmt(b, 0);
-    }
-    else if (t == YANG_LEAFREF_SPECIFICATION) {
-      r = leafref_specification(b, 0);
-    }
-    else if (t == YANG_LENGTH_STMT) {
-      r = length_stmt(b, 0);
-    }
-    else if (t == YANG_LIST_STMT) {
-      r = list_stmt(b, 0);
-    }
-    else if (t == YANG_MANDATORY_ARG) {
-      r = mandatory_arg(b, 0);
-    }
-    else if (t == YANG_MANDATORY_STMT) {
-      r = mandatory_stmt(b, 0);
-    }
-    else if (t == YANG_MAX_ELEMENTS_STMT) {
-      r = max_elements_stmt(b, 0);
-    }
-    else if (t == YANG_MAX_VALUE_ARG) {
-      r = max_value_arg(b, 0);
-    }
-    else if (t == YANG_MIN_ELEMENTS_STMT) {
-      r = min_elements_stmt(b, 0);
-    }
-    else if (t == YANG_MIN_VALUE_ARG) {
-      r = min_value_arg(b, 0);
-    }
-    else if (t == YANG_MODULE_STMT) {
-      r = module_stmt(b, 0);
-    }
-    else if (t == YANG_MUST_STMT) {
-      r = must_stmt(b, 0);
-    }
-    else if (t == YANG_NAMESPACE_STMT) {
-      r = namespace_stmt(b, 0);
-    }
-    else if (t == YANG_NODE_IDENTIFIER) {
-      r = node_identifier(b, 0);
-    }
-    else if (t == YANG_NOTIFICATION_STMT) {
-      r = notification_stmt(b, 0);
-    }
-    else if (t == YANG_NUMERICAL_RESTRICTIONS) {
-      r = numerical_restrictions(b, 0);
-    }
-    else if (t == YANG_ORDERED_BY_ARG) {
-      r = ordered_by_arg(b, 0);
-    }
-    else if (t == YANG_ORDERED_BY_STMT) {
-      r = ordered_by_stmt(b, 0);
-    }
-    else if (t == YANG_ORGANIZATION_STMT) {
-      r = organization_stmt(b, 0);
-    }
-    else if (t == YANG_OUTPUT_STMT) {
-      r = output_stmt(b, 0);
-    }
-    else if (t == YANG_PATH_STMT) {
-      r = path_stmt(b, 0);
-    }
-    else if (t == YANG_PATTERN_STMT) {
-      r = pattern_stmt(b, 0);
-    }
-    else if (t == YANG_POSITION_STMT) {
-      r = position_stmt(b, 0);
-    }
-    else if (t == YANG_PREFIX) {
-      r = prefix(b, 0);
-    }
-    else if (t == YANG_PREFIX_STMT) {
-      r = prefix_stmt(b, 0);
-    }
-    else if (t == YANG_PRESENCE_STMT) {
-      r = presence_stmt(b, 0);
-    }
-    else if (t == YANG_RANGE_STMT) {
-      r = range_stmt(b, 0);
-    }
-    else if (t == YANG_REFERENCE_STMT) {
-      r = reference_stmt(b, 0);
-    }
-    else if (t == YANG_REFINE_ANYXML_STMTS) {
-      r = refine_anyxml_stmts(b, 0);
-    }
-    else if (t == YANG_REFINE_CASE_STMTS) {
-      r = refine_case_stmts(b, 0);
-    }
-    else if (t == YANG_REFINE_CHOICE_STMTS) {
-      r = refine_choice_stmts(b, 0);
-    }
-    else if (t == YANG_REFINE_CONTAINER_STMTS) {
-      r = refine_container_stmts(b, 0);
-    }
-    else if (t == YANG_REFINE_LEAF_LIST_STMTS) {
-      r = refine_leaf_list_stmts(b, 0);
-    }
-    else if (t == YANG_REFINE_LEAF_STMTS) {
-      r = refine_leaf_stmts(b, 0);
-    }
-    else if (t == YANG_REFINE_LIST_STMTS) {
-      r = refine_list_stmts(b, 0);
-    }
-    else if (t == YANG_REFINE_POM) {
-      r = refine_pom(b, 0);
-    }
-    else if (t == YANG_REFINE_STMT) {
-      r = refine_stmt(b, 0);
-    }
-    else if (t == YANG_REQUIRE_INSTANCE_ARG) {
-      r = require_instance_arg(b, 0);
-    }
-    else if (t == YANG_REQUIRE_INSTANCE_STMT) {
-      r = require_instance_stmt(b, 0);
-    }
-    else if (t == YANG_REVISION_DATE_STMT) {
-      r = revision_date_stmt(b, 0);
-    }
-    else if (t == YANG_REVISION_STMT) {
-      r = revision_stmt(b, 0);
-    }
-    else if (t == YANG_RPC_STMT) {
-      r = rpc_stmt(b, 0);
-    }
-    else if (t == YANG_SHORT_CASE_STMT) {
-      r = short_case_stmt(b, 0);
-    }
-    else if (t == YANG_STATUS_ARG) {
-      r = status_arg(b, 0);
-    }
-    else if (t == YANG_STATUS_STMT) {
-      r = status_stmt(b, 0);
-    }
-    else if (t == YANG_STMTEND) {
-      r = stmtend(b, 0);
-    }
-    else if (t == YANG_STMTSEP) {
-      r = stmtsep(b, 0);
-    }
-    else if (t == YANG_STRING) {
-      r = string(b, 0);
-    }
-    else if (t == YANG_STRING_LITERAL) {
-      r = string_literal(b, 0);
-    }
-    else if (t == YANG_STRING_RESTRICTIONS) {
-      r = string_restrictions(b, 0);
-    }
-    else if (t == YANG_SUBMODULE_HEADER_STMTS) {
-      r = submodule_header_stmts(b, 0);
-    }
-    else if (t == YANG_SUBMODULE_STMT) {
-      r = submodule_stmt(b, 0);
-    }
-    else if (t == YANG_TYPE_BODY_STMTS) {
-      r = type_body_stmts(b, 0);
-    }
-    else if (t == YANG_TYPE_STMT) {
-      r = type_stmt(b, 0);
-    }
-    else if (t == YANG_TYPEDEF_STMT) {
-      r = typedef_stmt(b, 0);
-    }
-    else if (t == YANG_UNION_SPECIFICATION) {
-      r = union_specification(b, 0);
-    }
-    else if (t == YANG_UNIQUE_STMT) {
-      r = unique_stmt(b, 0);
-    }
-    else if (t == YANG_UNITS_STMT) {
-      r = units_stmt(b, 0);
-    }
-    else if (t == YANG_UNKNOWN_STATEMENT) {
-      r = unknown_statement(b, 0);
-    }
-    else if (t == YANG_UNKNOWN_STATEMENT_2) {
-      r = unknown_statement2(b, 0);
-    }
-    else if (t == YANG_USES_AUGMENT_STMT) {
-      r = uses_augment_stmt(b, 0);
-    }
-    else if (t == YANG_USES_STMT) {
-      r = uses_stmt(b, 0);
-    }
-    else if (t == YANG_VALUE_STMT) {
-      r = value_stmt(b, 0);
-    }
-    else if (t == YANG_WHEN_STMT) {
-      r = when_stmt(b, 0);
-    }
-    else if (t == YANG_YANG_VERSION_ARG) {
-      r = yang_version_arg(b, 0);
-    }
-    else if (t == YANG_YANG_VERSION_STMT) {
-      r = yang_version_stmt(b, 0);
-    }
-    else if (t == YANG_YIN_ELEMENT_ARG) {
-      r = yin_element_arg(b, 0);
-    }
-    else if (t == YANG_YIN_ELEMENT_STMT) {
-      r = yin_element_stmt(b, 0);
-    }
-    else {
-      r = parse_root_(t, b, 0);
-    }
+    r = parse_root_(t, b);
     exit_section_(b, 0, m, t, r, true, TRUE_CONDITION);
   }
 
-  protected boolean parse_root_(IElementType t, PsiBuilder b, int l) {
+  protected boolean parse_root_(IElementType t, PsiBuilder b) {
+    return parse_root_(t, b, 0);
+  }
+
+  static boolean parse_root_(IElementType t, PsiBuilder b, int l) {
     return yang(b, l + 1);
   }
 
@@ -556,11 +219,9 @@ public class YangParser implements PsiParser, LightPsiParser {
   private static boolean StatementRecover_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "StatementRecover_0")) return false;
     boolean r;
-    Marker m = enter_section_(b);
     r = consumeToken(b, YANG_SEMICOLON);
     if (!r) r = consumeToken(b, YANG_LEFT_BRACE);
     if (!r) r = consumeToken(b, YANG_RIGHT_BRACE);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -1302,14 +963,52 @@ public class YangParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // fraction_digits_stmt
+  // (fraction_digits_stmt stmtsep | range_stmt stmtsep)+
   public static boolean decimal64_specification(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "decimal64_specification")) return false;
-    if (!nextTokenIs(b, YANG_FRACTION_DIGITS_KEYWORD)) return false;
+    if (!nextTokenIs(b, "<decimal 64 specification>", YANG_FRACTION_DIGITS_KEYWORD, YANG_RANGE_KEYWORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, YANG_DECIMAL_64_SPECIFICATION, "<decimal 64 specification>");
+    r = decimal64_specification_0(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!decimal64_specification_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "decimal64_specification", c)) break;
+    }
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // fraction_digits_stmt stmtsep | range_stmt stmtsep
+  private static boolean decimal64_specification_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "decimal64_specification_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = decimal64_specification_0_0(b, l + 1);
+    if (!r) r = decimal64_specification_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // fraction_digits_stmt stmtsep
+  private static boolean decimal64_specification_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "decimal64_specification_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = fraction_digits_stmt(b, l + 1);
-    exit_section_(b, m, YANG_DECIMAL_64_SPECIFICATION, r);
+    r = r && stmtsep(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // range_stmt stmtsep
+  private static boolean decimal64_specification_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "decimal64_specification_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = range_stmt(b, l + 1);
+    r = r && stmtsep(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -4639,12 +4338,13 @@ public class YangParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "1"
+  // "1" | "1.1"
   public static boolean yang_version_arg(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "yang_version_arg")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, YANG_YANG_VERSION_ARG, "<yang version arg>");
     r = consumeToken(b, "1");
+    if (!r) r = consumeToken(b, "1.1");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -4688,7 +4388,7 @@ public class YangParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  final static Parser StatementRecover_parser_ = new Parser() {
+  static final Parser StatementRecover_parser_ = new Parser() {
     public boolean parse(PsiBuilder b, int l) {
       return StatementRecover(b, l + 1);
     }
