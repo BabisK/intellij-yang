@@ -12,7 +12,7 @@ This IntelliJ Plugin adds support for YANG.
 
 ## Quick Start
 
-1. Download .zip file from [release page](https://github.com/exjobo/intellij-yang/releases)
+1. Download .zip file from [release page](https://github.com/afoteas/intellij-yang/releases)
 2. Go *Preferences* menu, then select *Plugins* page
 3. Select *Install plugin from disk*, then choose downloaded .zip file
 4. Restart IntelliJ IDEA
