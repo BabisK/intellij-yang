@@ -16,10 +16,12 @@ public class YangNamespaceStmtImpl extends YangStatementImpl implements YangName
     super(node);
   }
 
+  @Override
   public void accept(@NotNull YangVisitor visitor) {
     visitor.visitNamespaceStmt(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

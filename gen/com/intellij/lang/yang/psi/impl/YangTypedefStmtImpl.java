@@ -16,10 +16,12 @@ public class YangTypedefStmtImpl extends YangStatementImpl implements YangTypede
     super(node);
   }
 
+  @Override
   public void accept(@NotNull YangVisitor visitor) {
     visitor.visitTypedefStmt(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

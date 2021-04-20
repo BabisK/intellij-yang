@@ -20,6 +20,7 @@ public class YangLeafrefSpecificationImpl extends YangCompositeElementImpl imple
     visitor.visitLeafrefSpecification(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

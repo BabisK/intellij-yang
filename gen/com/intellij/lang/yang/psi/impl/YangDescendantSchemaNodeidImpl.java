@@ -20,6 +20,7 @@ public class YangDescendantSchemaNodeidImpl extends YangCompositeElementImpl imp
     visitor.visitDescendantSchemaNodeid(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

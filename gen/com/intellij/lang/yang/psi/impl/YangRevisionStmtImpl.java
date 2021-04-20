@@ -16,10 +16,12 @@ public class YangRevisionStmtImpl extends YangStatementImpl implements YangRevis
     super(node);
   }
 
+  @Override
   public void accept(@NotNull YangVisitor visitor) {
     visitor.visitRevisionStmt(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

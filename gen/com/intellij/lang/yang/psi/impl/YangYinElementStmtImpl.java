@@ -16,10 +16,12 @@ public class YangYinElementStmtImpl extends YangStatementImpl implements YangYin
     super(node);
   }
 
+  @Override
   public void accept(@NotNull YangVisitor visitor) {
     visitor.visitYinElementStmt(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

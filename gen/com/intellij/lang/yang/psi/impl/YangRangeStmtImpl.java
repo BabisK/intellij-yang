@@ -16,10 +16,12 @@ public class YangRangeStmtImpl extends YangStatementImpl implements YangRangeStm
     super(node);
   }
 
+  @Override
   public void accept(@NotNull YangVisitor visitor) {
     visitor.visitRangeStmt(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

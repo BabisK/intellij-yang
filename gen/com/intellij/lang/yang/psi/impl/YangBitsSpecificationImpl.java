@@ -20,6 +20,7 @@ public class YangBitsSpecificationImpl extends YangCompositeElementImpl implemen
     visitor.visitBitsSpecification(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

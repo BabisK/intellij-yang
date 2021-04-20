@@ -20,6 +20,7 @@ public class YangPrefixImpl extends YangCompositeElementImpl implements YangPref
     visitor.visitPrefix(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

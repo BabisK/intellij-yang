@@ -64,7 +64,7 @@ yang-version-stmt   = yang-version-keyword sep yang-version-arg-str
 
 yang-version-arg-str = < a string that matches the rule yang-version-arg >
 
-yang-version-arg    = "1"
+yang-version-arg    = decimal-value
 
 import-stmt         = import-keyword sep identifier-arg-str optsep
                      "{" stmtsep

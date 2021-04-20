@@ -20,6 +20,7 @@ public class YangStmtsepImpl extends YangCompositeElementImpl implements YangStm
     visitor.visitStmtsep(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

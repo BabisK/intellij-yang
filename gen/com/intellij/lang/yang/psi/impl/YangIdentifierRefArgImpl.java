@@ -20,6 +20,7 @@ public class YangIdentifierRefArgImpl extends YangCompositeElementImpl implement
     visitor.visitIdentifierRefArg(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

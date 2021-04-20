@@ -20,6 +20,7 @@ public class YangConfigArgImpl extends YangCompositeElementImpl implements YangC
     visitor.visitConfigArg(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

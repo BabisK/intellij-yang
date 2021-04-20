@@ -234,7 +234,7 @@ public class YangParser implements PsiParser, LightPsiParser {
     r = Statement(b, l + 1);
     p = r; // pin = 1
     r = r && StatementWithSemi_1(b, l + 1);
-    exit_section_(b, l, m, r, p, StatementRecover_parser_);
+    exit_section_(b, l, m, r, p, YangParser::StatementRecover);
     return r || p;
   }
 
@@ -4388,9 +4388,4 @@ public class YangParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  static final Parser StatementRecover_parser_ = new Parser() {
-    public boolean parse(PsiBuilder b, int l) {
-      return StatementRecover(b, l + 1);
-    }
-  };
 }

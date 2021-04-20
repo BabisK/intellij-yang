@@ -16,10 +16,12 @@ public class YangDeviateNotSupportedStmtImpl extends YangStatementImpl implement
     super(node);
   }
 
+  @Override
   public void accept(@NotNull YangVisitor visitor) {
     visitor.visitDeviateNotSupportedStmt(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

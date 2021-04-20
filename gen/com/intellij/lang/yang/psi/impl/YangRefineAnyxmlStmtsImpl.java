@@ -20,6 +20,7 @@ public class YangRefineAnyxmlStmtsImpl extends YangCompositeElementImpl implemen
     visitor.visitRefineAnyxmlStmts(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

@@ -20,6 +20,7 @@ public class YangRefineLeafListStmtsImpl extends YangCompositeElementImpl implem
     visitor.visitRefineLeafListStmts(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

@@ -20,6 +20,7 @@ public class YangStringRestrictionsImpl extends YangCompositeElementImpl impleme
     visitor.visitStringRestrictions(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

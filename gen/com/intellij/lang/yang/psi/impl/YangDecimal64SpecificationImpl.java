@@ -20,6 +20,7 @@ public class YangDecimal64SpecificationImpl extends YangCompositeElementImpl imp
     visitor.visitDecimal64Specification(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

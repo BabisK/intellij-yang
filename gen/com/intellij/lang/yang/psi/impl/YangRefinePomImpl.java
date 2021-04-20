@@ -20,6 +20,7 @@ public class YangRefinePomImpl extends YangCompositeElementImpl implements YangR
     visitor.visitRefinePom(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);

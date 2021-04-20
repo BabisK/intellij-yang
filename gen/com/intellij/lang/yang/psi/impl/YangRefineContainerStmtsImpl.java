@@ -20,6 +20,7 @@ public class YangRefineContainerStmtsImpl extends YangCompositeElementImpl imple
     visitor.visitRefineContainerStmts(this);
   }
 
+  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof YangVisitor) accept((YangVisitor)visitor);
     else super.accept(visitor);
